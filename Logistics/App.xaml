@@ -1,0 +1,33 @@
+﻿<Application x:Class="Logistics.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Logistics"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+
+            </ResourceDictionary.MergedDictionaries>
+            <!--PRIMARY-->
+            <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#9B6AD6"/>
+            <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="#ffffff"/>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#8643D6"/>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#ffffff"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#512882"/>
+            <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="#ffffff"/>
+
+            <SolidColorBrush x:Key="SecondaryHueLightBrush" Color="#ffffff"/>
+            <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="#000000"/>
+            <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#E5E5E5"/>
+            <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="#000000"/>
+            <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#D5D5D5"/>
+            <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="#000000"/>
+
+            <!--ACCENT-->
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#b5b5b5b5"/>
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#000000"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,67 @@
+﻿<local:ExtendedWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Logistics"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Logistics.MainWindow"
+        mc:Ignorable="d"
+        Title="Authorization" Height="200" Width="350" WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" ResizeMode="NoResize" AllowsTransparency="True">
+    <Border BorderBrush="{StaticResource PrimaryHueLightBrush}" BorderThickness="1" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Height="20" Background="{StaticResource PrimaryHueLightBrush}" MouseDown="Grid_MouseDown" >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Click="btnResizeWindowsClick" x:Name="btnResizeWindows" Height="19" Width="18" Margin="1" Style="{StaticResource   MaterialDesignIconButton}">
+                        <materialDesign:PackIcon Kind="WindowMinimize" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="18" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                    </Button>
+                    <Button Click="BtnCloseClick" Height="19" Width="18" Margin="1" Style="{StaticResource   MaterialDesignIconButton}">
+                        <materialDesign:PackIcon Kind="Close" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="18" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TextBlock Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Text="АВТОРИЗАЦИЯ" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid Grid.Row="2">
+                <StackPanel VerticalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2">
+                        <Grid  Width="30" Height="30" Background="{StaticResource PrimaryHueLightBrush}" Margin="2">
+                            <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Kind="User"
+                            Foreground="{StaticResource MaterialDesignBackground}"
+                            Width="25"
+                            Height="25"
+                            />
+                        </Grid>
+                        <TextBox Name="loginBox"  materialDesign:HintAssist.Hint="Логин" Style="{StaticResource MaterialDesignTextBox}" Width="150" Height="30"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2">
+                        <Grid  Width="30" Height="30" Background="{StaticResource PrimaryHueLightBrush}" Margin="2">
+                            <materialDesign:PackIcon VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Kind="Password"
+                            Foreground="{StaticResource MaterialDesignBackground}"
+                            Width="25"
+                            Height="25"
+                        />
+                        </Grid>
+                        <PasswordBox Name="passwordBox"  materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignPasswordBox}" Height="30" Width="150"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="3">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Click="BtnCloseClick" Margin="10" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Width="90" Content="Отмена"/>
+                    <Button Click="AuthorizationBtnClick" Margin="10" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="90" Content="Войти"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</local:ExtendedWindow>
