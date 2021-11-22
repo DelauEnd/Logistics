@@ -9,11 +9,13 @@ namespace Contracts
     public interface IRepositoryManager
     {
         ICargoCategoryRepository CargoCategories { get; }
+        ICargoTypeRepository Types { get; }
         ICargoRepository Cargoes { get; }
         ICustomerRepository Customers { get; }
         IOrderRepository Orders { get; }
         IRouteRepository Routes { get; }
-        ITransportRepository Transport { get; }
+        ITruckRepository Trucks { get; }
+        ITrailerRepository Trailers { get; }
         IUserRepository Users { get; }
         Task SaveAsync();
         void ClearTrackers();

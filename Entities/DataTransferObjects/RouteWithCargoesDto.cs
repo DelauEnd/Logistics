@@ -9,7 +9,7 @@ namespace Entities.DataTransferObjects
     {
         public int Id { get; set; }
 
-        public string TransportRegistrationNumber { get; set; }
+        public string TruckRegistrationNumber { get; set; }
 
         public List<CargoDto> Cargoes { get; set; }
     }

@@ -12,21 +12,21 @@ namespace Entities.Models
     {
         [Key]
         [Column("OrderId")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public EStatuses Status { get; set; } = EStatuses.PROCESSING;
 
         [Required]
-        public int SenderId { get; set; }
+        public Guid SenderId { get; set; }
         public Customer Sender { get; set; }
 
         [Required]
-        public int DestinationId { get; set; }
+        public Guid DestinationId { get; set; }
         public Customer Destination { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
 
         public List<Cargo> Cargoes { get; set; }

@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.Enums;
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Entities.Configuration
 {
-    public class CargoConfiguration : IEntityTypeConfiguration<Cargo>
+    public class CargoConfiguration : DefaultGuids, IEntityTypeConfiguration<Cargo>
     {
         public void Configure(EntityTypeBuilder<Cargo> builder)
         {
@@ -20,20 +21,21 @@ namespace Entities.Configuration
             (
                 new Cargo
                 {
-                    Id = 1,
+                    Id = CargoGuid,
                     Title = "Initial Cargo",
-                    CategoryId = 1,
+                    CategoryId = CategoryGuid,
                     DepartureDate = DateTime.Now,
-                    ArrivalDate = DateTime.Now.AddDays(10),
-                    RouteId = 1,
-                    OrderId = 1,
+                    ArrivalDate = DateTime.Now,
+                    RouteId = RouteGuid,
+                    OrderId = OrderGuid,
+                    Status = EStatuses.PROCESSING,
                     Weight = 200,                           
                 }
             );
             builder.OwnsOne(Cargo => Cargo.Dimensions).HasData(
                 new
                 {
-                    CargoId = 1,
+                    CargoId = CargoGuid,
                     Height = 50d,
                     Width = 50d,
                     Length = 50d

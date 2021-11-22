@@ -7,6 +7,6 @@ namespace Entities.DataTransferObjects
 {
     public class RouteForCreationDto
     {
-        public string TransportRegistrationNumber { get; set; }
+        public string TruckRegistrationNumber { get; set; }
     }
 }

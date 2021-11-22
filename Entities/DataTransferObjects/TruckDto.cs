@@ -1,13 +1,14 @@
 ﻿using Entities.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Entities.DataTransferObjects
 {
-    public class TransportForCreationDto
+    public class TruckDto
     {
+        public int Id { get; set; }
+
         public string RegistrationNumber { get; set; }
 
         public double LoadCapacity { get; set; }

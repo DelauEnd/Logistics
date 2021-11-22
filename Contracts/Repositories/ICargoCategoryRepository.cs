@@ -8,10 +8,10 @@ namespace Contracts
 {
     public interface ICargoCategoryRepository
     {
-        Task<CargoCategory> GetCategoryByCargoIdAsync(int id, bool trackChanges);
+        Task<CargoCategory> GetCategoryByCargoIdAsync(Guid id, bool trackChanges);
         Task<IEnumerable<CargoCategory>> GetAllCategoriesAsync(bool trackChanges);
         void CreateCategory(CargoCategory category);
-        Task<CargoCategory> GetCategoryByIdAsync(int id, bool trackChanges);
+        Task<CargoCategory> GetCategoryByIdAsync(Guid id, bool trackChanges);
         void DeleteCategory(CargoCategory category);
     }
 }

@@ -7,10 +7,10 @@ using System.Text.Json.Serialization;
 
 namespace Entities.Models
 {
-    public class CargoCategory : IEntity
+    public class CargoType : IEntity
     {
         [Key]
-        [Column("CategoryId")]
+        [Column("TypeId")]
         public Guid Id { get; set; }
 
         [Required]
@@ -18,5 +18,7 @@ namespace Entities.Models
         public string Title { get; set; }
 
         public List<Cargo> Cargoes { get; set; }
+        public List<Trailer> Trailers { get; set; }
+        public List<Truck> Trucks { get; set; }
     }
 }

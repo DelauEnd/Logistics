@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Entities.Configuration
 {
-    public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
+    public class CustomerConfiguration : DefaultGuids, IEntityTypeConfiguration<Customer>
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
@@ -20,20 +20,30 @@ namespace Entities.Configuration
             (
                 new Customer
                 {
-                    Id = 1,
+                    Id = CustomerGuid,
                     Address = "14681 Longview Dr, Loxley, AL, 36551 ",                     
                 }
             );
 
             builder.OwnsOne(Customer => Customer.ContactPerson).HasData
             (
-                new //По возможности избавиться от анонимного типа
+                new
                 {
-                    CustomerId = 1,
+                    CustomerId = CustomerGuid,
                     Name = "Pasha",
                     Surname = "Trikorochki",
                     Patronymic = "Olegovich",
                     PhoneNumber = "86(4235)888-11-34"
+                }
+            );
+
+            builder.OwnsOne(Customer => Customer.Coordinates).HasData
+            (
+                new
+                {
+                    CustomerId = CustomerGuid,
+                    Latitude = 10.5d,
+                    Longitude = 12.5d
                 }
             );
         }

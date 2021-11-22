@@ -7,21 +7,21 @@ using System.Text;
 
 namespace Entities.Configuration
 {
-    public class CargoCategoryConfiguration : DefaultGuids, IEntityTypeConfiguration<CargoCategory>
+    public class CargoTypeConfiguration : DefaultGuids, IEntityTypeConfiguration<CargoType>
     {
-        public void Configure(EntityTypeBuilder<CargoCategory> builder)
+        public void Configure(EntityTypeBuilder<CargoType> builder)
         {
             AddInitialData(builder);
         }
 
-        private void AddInitialData(EntityTypeBuilder<CargoCategory> builder)
+        private void AddInitialData(EntityTypeBuilder<CargoType> builder)
         {
             builder.HasData
             (
-                new CargoCategory
+                new CargoType
                 {
-                    Id = CategoryGuid,
-                    Title = "Initial Category"
+                    Id = TypeGuid,
+                    Title = "Initial Type"
                 }
             );
         }

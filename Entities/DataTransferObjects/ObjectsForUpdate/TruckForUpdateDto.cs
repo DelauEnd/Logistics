@@ -1,14 +1,10 @@
 ﻿using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.ComponentModel.DataAnnotations;
 
-namespace Entities.DataTransferObjects
+namespace Entities.DataTransferObjects.ObjectsForUpdate
 {
-    public class TransportDto
+    public class TruckForUpdateDto
     {
-        public int Id { get; set; }
-
         public string RegistrationNumber { get; set; }
 
         public double LoadCapacity { get; set; }

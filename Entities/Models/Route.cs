@@ -10,17 +10,22 @@ namespace Entities.Models
     {
         [Key]
         [Column("RouteId")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }  
 
         [Required]
-        [ForeignKey(nameof(Transport))]
-        public int TransportId { get; set; }
-        public Transport Transport { get; set; }
+        [ForeignKey(nameof(Truck))]
+        public Guid TruckId { get; set; }
+        public Truck Truck { get; set; }
+
+        [ForeignKey(nameof(Trailer))]
+        public Guid? TrailerId { get; set; }
+        public Trailer Trailer { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public User User { get; set; }
 
         public List<Cargo> Cargoes { get; set; }
+
     }
 }

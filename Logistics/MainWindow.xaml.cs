@@ -48,7 +48,7 @@ namespace Logistics
 
         private async void AuthorizationBtnClick(object sender, RoutedEventArgs e)
         {
-            var elem = await repository.Transport.GetTransportByIdAsync(1, true);
+            var elem = await repository.Trucks.GetTruckByIdAsync(new Guid("9ac8905e-dd8e-43eb-b58d-9464da6fab6b"), true);
             MessageBox.Show(elem.Driver.Name);
             logger.LogInfo($"Logged successfull. !!!{elem.Driver.Name}!!! ");
         }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Entities.Configuration
 {
-    public class RouteConfiguration : IEntityTypeConfiguration<Route>
+    public class RouteConfiguration : DefaultGuids, IEntityTypeConfiguration<Route>
     {
         public void Configure(EntityTypeBuilder<Route> builder)
         {
@@ -20,9 +20,9 @@ namespace Entities.Configuration
             (
                 new Route
                 {
-                    Id = 1,
-                    UserId = 1,
-                    TransportId = 1
+                    Id = RouteGuid,
+                    UserId = UserGuid,
+                    TruckId = TruckGuid,                      
                 }
             );
         }

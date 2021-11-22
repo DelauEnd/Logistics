@@ -7,25 +7,23 @@ using System.Text.Json.Serialization;
 
 namespace Entities.Models
 {
-    public class Transport : IEntity
+    public class Trailer : IEntity
     {
         [Key]
-        [Column("TransportId")]
-        public int Id { get; set; }
+        [Column("TrailerId")]
+        public Guid Id { get; set; }
 
         [Required]
         [MaxLength(30)]
         public string RegistrationNumber { get; set; }
 
-        [Range(0, double.MaxValue)]
-        public double? LoadCapacity { get; set; }
+        [Required]
+        public Guid TransportedCargoTypeId { get; set; }
+        public CargoType TransportedCargoType { get; set; }
 
         [Required]
         public Dimensions LimitLoad { get; set; }
 
-        [Required]
-        public Person Driver { get; set; }
-
-        public List<Route> Route { get; set; }
+        public List<Route> Routes { get; set; }
     }
 }

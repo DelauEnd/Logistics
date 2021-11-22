@@ -9,9 +9,11 @@ namespace Entities
     {
         public DbSet<Cargo> Cargoes { get; set; }
         public DbSet<CargoCategory> Categories { get; set; }
+        public DbSet<CargoType> Types { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Route> Routes { get; set; }
-        public DbSet<Transport> Transports { get; set; }
+        public DbSet<Truck> Trucks { get; set; }
+        public DbSet<Trailer> Trailers { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<User> Users { get; set; }
 
@@ -28,9 +30,10 @@ namespace Entities
 
         private void ApplyConfigurations(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.ApplyConfiguration(new CargoTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TrailerConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
-            modelBuilder.ApplyConfiguration(new TransportConfiguration());
+            modelBuilder.ApplyConfiguration(new TruckConfiguration());
             modelBuilder.ApplyConfiguration(new CargoCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new CargoConfiguration());

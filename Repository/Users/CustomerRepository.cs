@@ -2,6 +2,7 @@
 using Entities;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,17 +27,17 @@ namespace Repository.Users
             => await FindAll(trackChangess)
             .ToListAsync();
 
-        public async Task<Customer> GetCustomerByIdAsync(int id, bool trackChanges)
+        public async Task<Customer> GetCustomerByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(destination =>
             destination.Id == id, trackChanges)
             .SingleOrDefaultAsync();
 
-        public async Task<Customer> GetDestinationByOrderIdAsync(int id, bool trackChanges)
+        public async Task<Customer> GetDestinationByOrderIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(destination => 
             destination.OrderDestination.Where(order => order.Id == id).Any() , trackChanges)
             .SingleOrDefaultAsync();
 
-        public async Task<Customer> GetSenderByOrderIdAsync(int id, bool trackChanges)
+        public async Task<Customer> GetSenderByOrderIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(sender =>
             sender.OrderSender.Where(order => order.Id == id).Any(), trackChanges)
             .SingleOrDefaultAsync();

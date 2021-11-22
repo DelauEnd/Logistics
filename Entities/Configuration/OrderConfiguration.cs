@@ -1,10 +1,11 @@
 ﻿using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
 
 namespace Entities.Configuration
 {
-    public class OrderConfiguration : IEntityTypeConfiguration<Order>
+    public class OrderConfiguration : DefaultGuids, IEntityTypeConfiguration<Order>
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
@@ -31,10 +32,10 @@ namespace Entities.Configuration
              (
                 new Order
                 {
-                    Id = 1,
-                    UserId = 1,
-                    DestinationId = 1,
-                    SenderId = 1,
+                    Id = OrderGuid,
+                    UserId = UserGuid,
+                    DestinationId = CustomerGuid,
+                    SenderId = CustomerGuid,
                     Status = Enums.EStatuses.PROCESSING,
                 }
             );

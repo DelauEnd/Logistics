@@ -15,8 +15,10 @@ namespace Repository
         private ICustomerRepository customerRepository;
         private IOrderRepository orderRepository;
         private IRouteRepository routeRepository;
-        private ITransportRepository transportRepository;
+        private ITruckRepository truckRepository;
         private IUserRepository userRepository;
+        private ITrailerRepository trailerRepository;
+        private ICargoTypeRepository cargoTypeRepository;
 
         public RepositoryManager(RepositoryContext repositoryContext)
         {
@@ -81,13 +83,33 @@ namespace Repository
             }
         }
 
-        public ITransportRepository Transport
+        public ITruckRepository Trucks
         {
             get
             {
-                if (transportRepository == null)
-                    transportRepository = new TransportRepository(repositoryContext);
-                return transportRepository;
+                if (truckRepository == null)
+                    truckRepository = new TruckRepository(repositoryContext);
+                return truckRepository;
+            }
+        }
+
+        public ICargoTypeRepository Types
+        {
+            get
+            {
+                if (cargoTypeRepository == null)
+                    cargoTypeRepository = new CargoTypeRepository(repositoryContext);
+                return cargoTypeRepository;
+            }
+        }
+
+        public ITrailerRepository Trailers
+        {
+            get
+            {
+                if (trailerRepository == null)
+                    trailerRepository = new TrailerRepository(repositoryContext);
+                return trailerRepository;
             }
         }
 

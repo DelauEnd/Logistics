@@ -7,37 +7,37 @@ using System.Text;
 
 namespace Entities.Configuration
 {
-    class TransportConfiguration : IEntityTypeConfiguration<Transport>
+    class TruckConfiguration : DefaultGuids, IEntityTypeConfiguration<Truck>
     {
-        public void Configure(EntityTypeBuilder<Transport> builder)
+        public void Configure(EntityTypeBuilder<Truck> builder)
         {
             ConfigureModel(builder);
             AddInitialData(builder);
         }
 
-        private void ConfigureModel(EntityTypeBuilder<Transport> builder)
+        private void ConfigureModel(EntityTypeBuilder<Truck> builder)
         {
-            builder.HasIndex(transport
-                => transport.RegistrationNumber).IsUnique(true);
+            builder.HasIndex(truck
+                => truck.RegistrationNumber).IsUnique(true);
         }
 
-        private void AddInitialData(EntityTypeBuilder<Transport> builder)
+        private void AddInitialData(EntityTypeBuilder<Truck> builder)
         {
             builder.HasData
             (
-                new Transport
+                new Truck
                 {
-                    Id = 1,
+                    Id = TruckGuid,
                     LoadCapacity = 1000,
-                    RegistrationNumber = "A000AA",
+                    RegistrationNumber = "A000AA"
                 }
             );
 
-            builder.OwnsOne(Transport => Transport.Driver).HasData
+            builder.OwnsOne(Truck => Truck.Driver).HasData
             (
                 new
                 {
-                    TransportId = 1,
+                    TruckId = TruckGuid,
                     Name = "Sasha",
                     Surname = "Trikorochki",
                     Patronymic = "Vitaljevich",
@@ -45,11 +45,11 @@ namespace Entities.Configuration
                 }
             );
 
-            builder.OwnsOne(Transport => Transport.LimitLoad).HasData
+            builder.OwnsOne(Truck => Truck.LimitLoad).HasData
             (
                 new
                 {
-                    TransportId = 1,
+                    TruckId = TruckGuid,
                     Height = 50d,
                     Width = 50d,
                     Length = 50d

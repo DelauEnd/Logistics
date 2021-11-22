@@ -28,12 +28,12 @@ namespace Repository.Users
             => await FindAll(trackChanges)
             .ToListAsync();
 
-        public async Task<CargoCategory> GetCategoryByCargoIdAsync(int id, bool trackChanges)
+        public async Task<CargoCategory> GetCategoryByCargoIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(category =>
              category.Cargoes.Where(cargo => cargo.Id == id).Any(), trackChanges)
             .SingleOrDefaultAsync();
 
-        public async Task<CargoCategory> GetCategoryByIdAsync(int id, bool trackChanges)
+        public async Task<CargoCategory> GetCategoryByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(category =>
             category.Id == id, trackChanges)
             .SingleOrDefaultAsync();

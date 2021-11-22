@@ -2,6 +2,7 @@
 using Entities;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace Repository.Users
             .ToListAsync();
 
 
-        public async Task<Order> GetOrderByIdAsync(int id, bool trackChanges)
+        public async Task<Order> GetOrderByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(order => order.Id == id, trackChanges)
             .Include(order => order.Cargoes).ThenInclude(cargo => cargo.Category)
             .Include(route => route.Destination).Include(route => route.Sender)

@@ -12,7 +12,7 @@ namespace Entities.Models
     {
         [Key]
         [Column("CargoId")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [MaxLength(30)]
@@ -33,16 +33,16 @@ namespace Entities.Models
 
         [Required]
         [ForeignKey(nameof(CargoCategory))]
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         public CargoCategory Category { get; set; }
 
         [Required]
         [ForeignKey(nameof(Order))]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
         public Order Order { get; set; }
 
         [ForeignKey(nameof(Route))]
-        public int? RouteId { get; set; }
+        public Guid? RouteId { get; set; }
         public Route Route { get; set; }
     }
 }

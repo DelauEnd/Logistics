@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Entities.Configuration
 {
-    class UserConfiguration : IEntityTypeConfiguration<User>
+    class UserConfiguration : DefaultGuids, IEntityTypeConfiguration<User>
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
@@ -20,7 +20,7 @@ namespace Entities.Configuration
             (
                 new User
                 {
-                    Id = 1,
+                    Id = UserGuid,
                     Role = Enums.EUserRole.LOGIST
                 }
             );
@@ -29,7 +29,7 @@ namespace Entities.Configuration
             (
                 new
                 {
-                    UserId = 1,
+                    UserId = UserGuid,
                     Name = "Sasha",
                     Surname = "Trikorochki",
                     Patronymic = "Vitaljevich",
@@ -41,7 +41,7 @@ namespace Entities.Configuration
             (
                 new
                 {
-                    UserId = 1,
+                    UserId = UserGuid,
                     Login = "login1",
                     Password = "password1"
                 }

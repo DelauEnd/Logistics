@@ -12,7 +12,7 @@ namespace Entities.Models
     {
         [Key]
         [Column("UserId")]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         public EUserRole Role { get; set; }
