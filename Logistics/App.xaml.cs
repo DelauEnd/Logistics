@@ -1,4 +1,6 @@
-﻿using Logistics.Extensions;
+﻿using AutoMapper;
+using Logistics.Extensions;
+using Logistics.Utility;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using System;
@@ -37,6 +39,8 @@ namespace Logistics
             services.ConfigureSqlContext();
             services.ConfigureLoggerService();
             services.ConfigureRepositoryManager();
+            services.AddAutoMapper( c => c.AddProfile(new MappingProfile()));
+            services.AddSingleton<ITickTimer, TickTimer>();
         }
     }
 }

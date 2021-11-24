@@ -7,7 +7,7 @@ namespace Entities.DataTransferObjects
 {
     public class OrderWithCargoesDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Status { get; set; }
 

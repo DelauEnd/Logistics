@@ -4,15 +4,19 @@ namespace Entities.DataTransferObjects
 {
     public class CargoDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Title { get; set; }
 
         public string Category { get; set; }
 
-        public DateTime DepartureDate { get; set; } = DateTime.Now;
+        public string Status { get; set; }
 
-        public DateTime ArrivalDate { get; set; } = DateTime.Now;
+        public string Type { get; set; }
+
+        public DateTime? DepartureDate { get; set; }
+
+        public DateTime? ArrivalDate { get; set; }
 
         public double Weight { get; set; }
 

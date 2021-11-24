@@ -6,7 +6,7 @@ namespace Entities.DataTransferObjects
 {
     public class RouteDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string TruckRegistrationNumber { get; set; }
     }

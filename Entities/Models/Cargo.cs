@@ -37,6 +37,11 @@ namespace Entities.Models
         public CargoCategory Category { get; set; }
 
         [Required]
+        [ForeignKey(nameof(CargoType))]
+        public Guid TypeId { get; set; }
+        public CargoType Type { get; set; }
+
+        [Required]
         [ForeignKey(nameof(Order))]
         public Guid OrderId { get; set; }
         public Order Order { get; set; }

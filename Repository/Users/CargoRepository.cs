@@ -46,11 +46,15 @@ namespace Repository.Users
         public async Task<IEnumerable<Cargo>> GetCargoesByOrderIdAsync(Guid id, CargoParameters parameters, bool trackChanges)
             => await FindByCondition(cargo => cargo.OrderId == id, trackChanges)
             .Include(cargo => cargo.Category)
+            .Include(cargo => cargo.Type)
+            .ApplyFilters(parameters)
+            .Search(parameters.Search)
             .ToListAsync();
 
         public async Task<IEnumerable<Cargo>> GetCargoesByRouteIdAsync(Guid id, CargoParameters parameters, bool trackChanges)
             => await FindByCondition(cargo => cargo.RouteId == id, trackChanges)
             .Include(cargo => cargo.Category)
+            .Include(cargo => cargo.Type)
             .ApplyFilters(parameters)
             .Search(parameters.Search)
             .ToListAsync();

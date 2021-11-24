@@ -7,7 +7,7 @@ namespace Entities.DataTransferObjects
 {
     public class TruckDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string RegistrationNumber { get; set; }
 

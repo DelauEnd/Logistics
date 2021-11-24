@@ -7,7 +7,7 @@ namespace Entities.DataTransferObjects
 {
     public class CustomerDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         public string Address { get; set; }
 

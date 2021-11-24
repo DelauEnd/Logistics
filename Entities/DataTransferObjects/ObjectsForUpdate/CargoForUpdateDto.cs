@@ -10,7 +10,7 @@ namespace Entities.DataTransferObjects.ObjectsForUpdate
     {
         public string Title { get; set; }
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
 
         public DateTime DepartureDate { get; set; } = DateTime.Now;
 

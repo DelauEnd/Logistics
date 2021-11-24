@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Logistics.Extensions;
+using Logistics.LogistForms;
 
 namespace Logistics
 {
@@ -23,6 +25,7 @@ namespace Logistics
         public MainWindow()
         {
             InitializeComponent();
+            this.SetupWindowsStyle();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -46,11 +49,9 @@ namespace Logistics
             WindowState = WindowState.Minimized;
         }
 
-        private async void AuthorizationBtnClick(object sender, RoutedEventArgs e)
+        private void AuthorizationBtnClick(object sender, RoutedEventArgs e)
         {
-            var elem = await repository.Trucks.GetTruckByIdAsync(new Guid("9ac8905e-dd8e-43eb-b58d-9464da6fab6b"), true);
-            MessageBox.Show(elem.Driver.Name);
-            logger.LogInfo($"Logged successfull. !!!{elem.Driver.Name}!!! ");
+            new LogistMainForm().ShowDialog();
         }
     }
 }

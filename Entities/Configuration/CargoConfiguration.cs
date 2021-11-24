@@ -24,6 +24,7 @@ namespace Entities.Configuration
                     Id = CargoGuid,
                     Title = "Initial Cargo",
                     CategoryId = CategoryGuid,
+                    TypeId = TypeGuid,
                     DepartureDate = DateTime.Now,
                     ArrivalDate = DateTime.Now,
                     RouteId = RouteGuid,
