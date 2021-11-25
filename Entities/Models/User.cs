@@ -10,6 +10,7 @@ namespace Entities.Models
 {
     public class User : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("UserId")]
         public Guid Id { get; set; }

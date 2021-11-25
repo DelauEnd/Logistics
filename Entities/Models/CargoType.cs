@@ -9,6 +9,7 @@ namespace Entities.Models
 {
     public class CargoType : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("TypeId")]
         public Guid Id { get; set; }

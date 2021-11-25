@@ -1,8 +1,6 @@
-﻿using Contracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+using System.Linq;
 using System.Windows.Threading;
 
 namespace Logistics.Utility
@@ -10,7 +8,7 @@ namespace Logistics.Utility
     public class TickTimer : ITickTimer
     {
         public DispatcherTimer Timer { get; set; }
-        public List<string> EventsList { get; set; }
+        private Dictionary<string, EDelegateType> EventsList { get; set; }
 
         public TickTimer()
         {
@@ -18,7 +16,49 @@ namespace Logistics.Utility
             Timer.Interval = new TimeSpan(0, 0, 0, 0, 500);
             Timer.Start();
 
-            EventsList = new List<string>();
+            EventsList = new Dictionary<string, EDelegateType>();
+        }
+
+        public void AddEventIfNotExist(NamedEventDelegate elem)
+        {
+            if (IsContextRequest(elem) && HasContextRequests())
+                return;
+
+            if (!IventAlredyAdded(elem))
+                AddEvent(elem);
+        }
+
+        private static bool IsContextRequest(NamedEventDelegate elem)
+        {
+            return elem.Type == EDelegateType.CONTEXT_REQUEST;
+        }
+
+        private bool HasContextRequests()
+        {
+            return EventsList.Values.Any(value => value == EDelegateType.CONTEXT_REQUEST);
+        }
+
+        private void AddEvent(NamedEventDelegate elem)
+        {
+            Timer.Tick += elem.Event;
+            EventsList.Add(elem.EventName, elem.Type);
+        }
+
+        public void DeleteEventIfExist(NamedEventDelegate elem)
+        {
+            if (IventAlredyAdded(elem))
+                DeleteEvent(elem);
+        }
+
+        private void DeleteEvent(NamedEventDelegate elem)
+        {
+            Timer.Tick -= elem.Event;
+            EventsList.Remove(elem.EventName);
+        }
+
+        private bool IventAlredyAdded(NamedEventDelegate elem)
+        {
+            return EventsList.ContainsKey(elem.EventName);
         }
     }
 }

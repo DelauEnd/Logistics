@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Contracts;
 using Logistics.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 using Logistics.LogistForms;
 
 namespace Logistics
@@ -22,6 +24,9 @@ namespace Logistics
     /// </summary>
     public partial class MainWindow : ExtendedWindow
     {
+        private IAuthenticationManager _auth;
+        private IAuthenticationManager auth => _auth ?? (_auth = App.ServiceProvider.GetService<IAuthenticationManager>());
+
         public MainWindow()
         {
             InitializeComponent();
@@ -49,9 +54,12 @@ namespace Logistics
             WindowState = WindowState.Minimized;
         }
 
-        private void AuthorizationBtnClick(object sender, RoutedEventArgs e)
+        private async void AuthorizationBtnClick(object sender, RoutedEventArgs e)
         {
-            new LogistMainForm().ShowDialog();
+            var user = await auth.Authenticate(loginBox.Text, passwordBox.Password);
+
+            if(user!=null)
+                new LogistMainForm(user).ShowDialog();
         }
     }
 }

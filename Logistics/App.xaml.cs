@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Contracts;
 using Logistics.Extensions;
 using Logistics.Utility;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +42,7 @@ namespace Logistics
             services.ConfigureRepositoryManager();
             services.AddAutoMapper( c => c.AddProfile(new MappingProfile()));
             services.AddSingleton<ITickTimer, TickTimer>();
+            services.AddScoped<IAuthenticationManager, AuthenticationManager>();
         }
     }
 }

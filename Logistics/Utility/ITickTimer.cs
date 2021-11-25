@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Threading;
+﻿using System.Windows.Threading;
 
 namespace Logistics.Utility
 {
     public interface ITickTimer
     {
         public DispatcherTimer Timer { get; set; }
-        public List<string> EventsList { get; set; }
+
+        void AddEventIfNotExist(NamedEventDelegate elem);
+        void DeleteEventIfExist(NamedEventDelegate elem);
     }
 }

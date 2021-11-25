@@ -9,6 +9,7 @@ namespace Entities.Models
 {
     public class Truck : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("TruckId")]
         public Guid Id { get; set; }

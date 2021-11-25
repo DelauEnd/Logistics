@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Entities.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -43,7 +44,8 @@ namespace Entities.Configuration
                 {
                     UserId = UserGuid,
                     Login = "login1",
-                    Password = "password1"
+                    Password = "password1",
+                    PasswordHashString = AuthenticationUtility.CalculateStringHash("password1")
                 }
             );
         }

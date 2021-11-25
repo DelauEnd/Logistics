@@ -8,6 +8,7 @@ namespace Entities.Models
 {
     public class Route : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("RouteId")]
         public Guid Id { get; set; }  

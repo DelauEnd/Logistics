@@ -9,6 +9,7 @@ namespace Entities.Models
 {
     public class Trailer : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("TrailerId")]
         public Guid Id { get; set; }

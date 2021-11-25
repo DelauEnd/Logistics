@@ -9,6 +9,7 @@ namespace Entities.Models
 {
     public class CargoCategory : IEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         [Column("CategoryId")]
         public Guid Id { get; set; }

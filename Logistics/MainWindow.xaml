@@ -39,7 +39,7 @@
                             Height="25"
                             />
                         </Grid>
-                        <TextBox Name="loginBox"  materialDesign:HintAssist.Hint="Логин" Style="{StaticResource MaterialDesignTextBox}" Width="150" Height="30"/>
+                        <TextBox Name="loginBox" Text="" materialDesign:HintAssist.Hint="Логин" Style="{StaticResource MaterialDesignTextBox}" Width="150" Height="30"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="2">
@@ -51,13 +51,13 @@
                             Height="25"
                         />
                         </Grid>
-                        <PasswordBox Name="passwordBox"  materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignPasswordBox}" Height="30" Width="150"/>
+                        <PasswordBox Name="passwordBox" Password=""  materialDesign:HintAssist.Hint="Пароль" Style="{StaticResource MaterialDesignPasswordBox}" Height="30" Width="150"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>
             <Grid Grid.Row="3">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Click="BtnCloseClick" Margin="10" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Width="90" Content="Отмена"/>
+                    <Button Click="BtnCloseClick" Margin="10" Style="{StaticResource MaterialDesignFlatAccentButton}" Width="90" Content="Отмена"/>
                     <Button Click="AuthorizationBtnClick" Margin="10" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="90" Content="Войти"/>
                 </StackPanel>
             </Grid>
