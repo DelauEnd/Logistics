@@ -16,6 +16,7 @@ using Contracts;
 using Logistics.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Logistics.LogistForms;
+using Entities.Enums;
 
 namespace Logistics
 {
@@ -58,8 +59,15 @@ namespace Logistics
         {
             var user = await auth.Authenticate(loginBox.Text, passwordBox.Password);
 
-            if(user!=null)
-                new LogistMainForm(user).ShowDialog();
+            if (user == null)
+                return;
+
+            if (user.Role == EUserRole.LOGIST)
+                new LogistMainForm(user).Show();
+            else
+                ;
+
+            Close();
         }
     }
 }

@@ -27,10 +27,13 @@ namespace Logistics.LogistForms
     /// </summary>
     public partial class LogistMainForm : ExtendedWindow
     {
+        AuthenticatedUserInfo UserInfo { get; set; }
+
         public LogistMainForm(AuthenticatedUserInfo user)
         {
             InitializeComponent();
             this.SetupWindowsStyle();
+            UserInfo = user;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -56,7 +59,18 @@ namespace Logistics.LogistForms
 
         private async void WindowLoaded(object sender, RoutedEventArgs e)
         {
+            await SetupUserInfo();
+        }   
+
+        private async void DtLoaded(object sender, RoutedEventArgs e)
+        {
             await SetDefaultOrders();
+        }
+
+        private async Task SetupUserInfo()
+        {
+            var user = await repository.Users.GetUserByIdAsync(UserInfo.userId, false);
+            UserFIO.Text = user.ContactPerson.Surname + " " + user.ContactPerson.Name + " " + user.ContactPerson.Patronymic;
         }
 
         private async Task SetDefaultOrders()
@@ -183,6 +197,14 @@ namespace Logistics.LogistForms
             {
                 e.Handled = true;
             }
+        }
+
+        private void TabChange(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as RadioButton;
+
+            if (tabMenu != null)
+            tabMenu.SelectedIndex = tab.TabIndex;
         }
     }
 }

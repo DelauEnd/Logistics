@@ -30,7 +30,7 @@ namespace Repository.Users
             return user.AccountInfo.PasswordHashString;
         }
 
-        public async Task<EUserRole> GetRoleById(Guid id)
+        public async Task<EUserRole> GetRoleByIdAsync(Guid id)
         {
             var user = await FindByCondition(user => user.Id == id, false)
             .FirstOrDefaultAsync();
@@ -40,6 +40,10 @@ namespace Repository.Users
 
             return user.Role;
         }
+
+        public async Task<User> GetUserByIdAsync(Guid id)
+            => await FindByCondition(user => user.Id == id, false)
+            .SingleOrDefaultAsync();
 
         public async Task<Guid> GetUserIdByLoginIfExistAsync(string login)
         {
@@ -51,5 +55,10 @@ namespace Repository.Users
 
             return user.Id;
         }
+
+        public async Task<User> GetUserByIdAsync(Guid id, bool trackChanges)
+            => await FindByCondition(user =>
+            user.Id == id, trackChanges)
+            .SingleOrDefaultAsync();
     }
 }

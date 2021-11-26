@@ -21,6 +21,12 @@ namespace Logistics
             CreateOrderMaps();
             CreateCustomerMaps();
             CreateCargoCategoryMaps();
+            CreateUserMaps();
+        }
+
+        private void CreateUserMaps()
+        {
+            CreateMap<User, UserDto>();
         }
 
         private void CreateTruckMaps()

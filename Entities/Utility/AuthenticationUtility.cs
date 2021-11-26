@@ -11,7 +11,7 @@ namespace Entities.Utility
         {
             var passwordBytes = ASCIIEncoding.ASCII.GetBytes(Password);
             byte[] PasswordHash = new MD5CryptoServiceProvider().ComputeHash(passwordBytes);
-            return  ByteArrayToString(PasswordHash);
+            return ByteArrayToString(PasswordHash);
         }
 
         static string ByteArrayToString(byte[] arrInput)

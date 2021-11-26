@@ -43,7 +43,7 @@ namespace Logistics
             if (passwordHash != userHash)
                 throw new Exception("Wrong password");
 
-            var userRole = await repository.Users.GetRoleById(userId);
+            var userRole = await repository.Users.GetRoleByIdAsync(userId);
 
             var userInfo = new AuthenticatedUserInfo
             {

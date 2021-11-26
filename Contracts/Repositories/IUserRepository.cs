@@ -1,4 +1,5 @@
 ﻿using Entities.Enums;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Contracts.Repositories
     {
         public Task<Guid> GetUserIdByLoginIfExistAsync(string login);
         public Task<string> GetPasswordHashByIdAsync(Guid id);
-        Task<EUserRole> GetRoleById(Guid userGuid);
+        public Task<EUserRole> GetRoleByIdAsync(Guid userGuid);
+        public Task<User> GetUserByIdAsync(Guid id, bool trackChanges);
     }
 }
