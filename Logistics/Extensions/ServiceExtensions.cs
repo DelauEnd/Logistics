@@ -18,10 +18,10 @@ namespace Logistics.Extensions
             => services.AddScoped<ILoggerManager, LoggerManager>();
 
         public static void ConfigureSqlContext(this IServiceCollection services)
-            => services.AddDbContext<RepositoryContext>(options =>
-            options.UseSqlServer("server = localhost\\SQLEXPRESS;database=Logisticss;Trusted_Connection=True"));
+            => services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(ConfigurationManager.
+    ConnectionStrings["cs"].ConnectionString), ServiceLifetime.Transient);
 
         public static void ConfigureRepositoryManager(this IServiceCollection services)
-            => services.AddScoped<IRepositoryManager, RepositoryManager>();
+            => services.AddTransient<IRepositoryManager, RepositoryManager>();
     }
 }

@@ -9,5 +9,7 @@ namespace Entities.DataTransferObjects
         public Guid Id { get; set; }
 
         public string TruckRegistrationNumber { get; set; }
+
+        public string TrailerRegistrationNumber { get; set; }
     }
 }

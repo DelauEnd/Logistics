@@ -19,6 +19,7 @@ using Entities.RequestFeautures;
 using Entities.Utility;
 using Logistics.Extensions;
 using Logistics.Utility;
+using MaterialDesignThemes.Wpf;
 
 namespace Logistics.LogistForms
 {
@@ -28,23 +29,33 @@ namespace Logistics.LogistForms
     public partial class LogistMainForm : ExtendedWindow
     {
         AuthenticatedUserInfo UserInfo { get; set; }
+        private bool routesLoaded = false;
+        private bool ordersLoaded = false;
 
         public LogistMainForm(AuthenticatedUserInfo user)
         {
             InitializeComponent();
             this.SetupWindowsStyle();
+            ResizeMode = ResizeMode.CanResizeWithGrip;
             UserInfo = user;
+            orderTabBtn.IsChecked = true;
+        }
+
+        private void WindowStateChanged(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Normal;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            DragWindow(e);
+            if (draggable)
+                DragWindow(e);           
         }
 
         private void DragWindow(MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
-                DragMove();
+                DragMove();          
         }
 
         private void BtnCloseClick(object sender, RoutedEventArgs e)
@@ -52,19 +63,73 @@ namespace Logistics.LogistForms
             Close();
         }
 
-        private void btnResizeWindowsClick(object sender, RoutedEventArgs e)
+        private void BtnMinimizeWindowsClick(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;
+        }
+
+        private void BtnResizeWindowsClick(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+
+            if (this.maximazed)
+            {
+                this.WindowSetToNormal();
+                ((PackIcon)btn.Content).Kind = PackIconKind.WindowMaximize;
+            }
+            else
+            {
+                this.MaximizeWindow();
+                ((PackIcon)btn.Content).Kind = PackIconKind.WindowRestore;
+            }
         }
 
         private async void WindowLoaded(object sender, RoutedEventArgs e)
         {
             await SetupUserInfo();
-        }   
+        }
 
-        private async void DtLoaded(object sender, RoutedEventArgs e)
+        private void UpdateSource(DataGrid sender, IEnumerable<object> ItemSource, DataGrid relatedTable = null)
         {
-            await SetDefaultOrders();
+            sender.ItemsSource = ItemSource;
+
+            if (sender.Items.Count != 0)
+                sender.SelectedItem = sender.Items[0];
+
+            if (sender.SelectedItem == null && relatedTable != null)
+                relatedTable.ItemsSource = null;
+        }
+
+        private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
+        {
+            var box = sender as TextBox;
+
+            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
+               && (!box.Text.Contains(".")
+               && box.Text.Length != 0)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private async void TabChange(object sender, RoutedEventArgs e)
+        {
+            var tab = sender as RadioButton;
+
+            if (tabMenu != null)
+                tabMenu.SelectedIndex = tab.TabIndex;
+
+            await LoadeTabContentIfOpenedFirstTime(tab.TabIndex);
+        }
+
+        private async Task LoadeTabContentIfOpenedFirstTime(int tabIndex)
+        {
+            if (tabIndex == 0 && !ordersLoaded)
+                await SetDefaultOrders();
+            else if (tabIndex == 1 && !routesLoaded)
+                await SetDefaultRoutes();
+            else if (tabIndex == 2)
+                ;
         }
 
         private async Task SetupUserInfo()
@@ -73,11 +138,14 @@ namespace Logistics.LogistForms
             UserFIO.Text = user.ContactPerson.Surname + " " + user.ContactPerson.Name + " " + user.ContactPerson.Patronymic;
         }
 
+        #region OrderTab
         private async Task SetDefaultOrders()
         {
+            ordersLoaded = true;
+
             var orders = await repository.Orders.GetAllOrdersAsync(new OrderParameters(), false);
             var mappedOrders = mapper.Map<IEnumerable<OrderDto>>(orders);
-            UpdateSource(orderDt, mappedOrders);
+            UpdateSource(orderDt, mappedOrders, cargoDt);
         }
 
         private async void OrderDtSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -154,17 +222,6 @@ namespace Logistics.LogistForms
             return cargoDt.SelectedItem as CargoDto;
         }
 
-        private void UpdateSource(DataGrid sender, IEnumerable<object> ItemSource)
-        {
-            sender.ItemsSource = ItemSource;
-
-            if (sender.Items.Count != 0)
-                sender.SelectedItem = sender.Items[0];
-
-            if (GetSelectedOrder() == null)
-                cargoDt.ItemsSource = null;
-        }
-
         private async void SearchOrderBtnClick(object sender, RoutedEventArgs e)
         {
             var parameters = new OrderParameters { Search = searchOrderTb.Text };
@@ -185,26 +242,16 @@ namespace Logistics.LogistForms
                 UpdateSource(orderDt, mappedOrder);
             }
 
-        }
+        } 
+        #endregion
 
-        private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
+        private async Task SetDefaultRoutes()
         {
-            var box = sender as TextBox;
+            routesLoaded = true;
 
-            if (!(Char.IsDigit(e.Text, 0) || (e.Text == ".")
-               && (!box.Text.Contains(".")
-               && box.Text.Length != 0)))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void TabChange(object sender, RoutedEventArgs e)
-        {
-            var tab = sender as RadioButton;
-
-            if (tabMenu != null)
-            tabMenu.SelectedIndex = tab.TabIndex;
+            var routes = await repository.Routes.GetAllRoutesAsync(new RouteParameters(), false);
+            var mappedRoutes = mapper.Map<IEnumerable<RouteDto>>(routes);
+            UpdateSource(routeDt, mappedRoutes);
         }
     }
 }

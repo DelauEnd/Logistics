@@ -54,9 +54,10 @@ namespace Logistics
         private void CreateRouteMaps()
         {
             CreateMap<Route, RouteDto>()
-                .ForMember(routeDto => routeDto.TruckRegistrationNumber, option =>
-                option.MapFrom(transport =>
-                transport.Truck.RegistrationNumber));
+                .ForMember(routeDto => routeDto.TruckRegistrationNumber, option 
+                => option.MapFrom(transport => transport.Truck.RegistrationNumber))
+                .ForMember(routeDto => routeDto.TrailerRegistrationNumber, option => 
+                option.MapFrom(transport => transport.Trailer.RegistrationNumber));
         }
 
         private void CreateOrderMaps()

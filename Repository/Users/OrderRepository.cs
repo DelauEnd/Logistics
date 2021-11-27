@@ -30,6 +30,7 @@ namespace Repository.Users
             .Include(route => route.Destination)
             .Include(route => route.Sender)
             .Search(parameters.Search)
+            .ApplyFilters(parameters)
             .ToListAsync();
 
         public async Task<Order> GetOrderByIdAsync(Guid id, bool trackChanges)

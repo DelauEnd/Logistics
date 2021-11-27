@@ -19,5 +19,8 @@ namespace Logistics
 
         private ITickTimer _timer;
         protected ITickTimer timer => _timer ?? (_timer = App.ServiceProvider.GetService<ITickTimer>());
+
+        public bool draggable { get; set; } = true;
+        public bool maximazed { get; set; }
     }
 }

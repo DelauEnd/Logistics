@@ -1,7 +1,9 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Entities.RequestFeautures;
 using Microsoft.EntityFrameworkCore;
+using Repository.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +23,15 @@ namespace Repository.Users
             => await FindByCondition(route => route.Id == id, trackChanges)
             .Include(route => route.Cargoes).ThenInclude(cargo => cargo.Category)
             .Include(route => route.Truck)
+            .Include(route => route.Trailer)
             .SingleOrDefaultAsync();
 
-        public async Task<IEnumerable<Route>> GetAllRoutesAsync(bool trackChanges)
+        public async Task<IEnumerable<Route>> GetAllRoutesAsync(RouteParameters parameters, bool trackChanges)
             => await FindAll(trackChanges)
             .Include(route => route.Truck)
+            .Include(route => route.Trailer)
+            .Search(parameters.Search)
+            .ApplyFilters(parameters)
             .ToListAsync();
 
         public void CreateRoute(Route route)

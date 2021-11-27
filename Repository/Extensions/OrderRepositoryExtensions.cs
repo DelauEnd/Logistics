@@ -13,7 +13,7 @@ namespace Repository.Extensions
     {
         public static IQueryable<Order> ApplyFilters(this IQueryable<Order> orders, OrderParameters parameters)
         {
-            return null;
+            return orders;
         }
 
         public static IQueryable<Order> Search(this IQueryable<Order> orders, string search)
