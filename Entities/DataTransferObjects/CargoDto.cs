@@ -6,6 +6,8 @@ namespace Entities.DataTransferObjects
     {
         public Guid Id { get; set; }
 
+        public Guid OrderId { get; set; }
+
         public string Title { get; set; }
 
         public string Category { get; set; }

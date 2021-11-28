@@ -241,9 +241,41 @@ namespace Logistics.LogistForms
 
                 UpdateSource(orderDt, mappedOrder);
             }
+        }
 
-        } 
+        private async void SearchCargoTbTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(routeDtSearch.Text))
+            {
+                var selectedOrder = GetSelectedOrder();
+                var cargoes = await repository.Cargoes.GetCargoesByOrderIdAsync(selectedOrder.Id, new CargoParameters(), false);
+                var mappedCargo = mapper.Map<IEnumerable<CargoDto>>(cargoes);
+
+                UpdateSource(cargoDt, mappedCargo);
+            }
+        }
+
+        private async void SearchCargoClick(object sender, RoutedEventArgs e)
+        {
+            var parameters = new CargoParameters { Search = searchCargoTb.Text };
+           
+            var selectedOrder = GetSelectedOrder();
+            var cargoes = await repository.Cargoes.GetCargoesByOrderIdAsync(selectedOrder.Id, parameters, false);
+            var mappedCargoes = mapper.Map<IEnumerable<CargoDto>>(cargoes);
+
+            UpdateSource(cargoDt, mappedCargoes);
+        }
         #endregion
+
+        private RouteDto GetSelectedRoute()
+        {
+            return routeDt.SelectedItem as RouteDto;
+        }
+
+        private CargoDto GetSelectedCargoRoute()
+        {
+            return routeCargoDt.SelectedItem as CargoDto;
+        }
 
         private async Task SetDefaultRoutes()
         {
@@ -252,6 +284,83 @@ namespace Logistics.LogistForms
             var routes = await repository.Routes.GetAllRoutesAsync(new RouteParameters(), false);
             var mappedRoutes = mapper.Map<IEnumerable<RouteDto>>(routes);
             UpdateSource(routeDt, mappedRoutes);
+        }
+
+        private async void RouteDtSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var SelectedRoute = GetSelectedRoute();
+
+            if (orderDt.Items.Count == 0 || SelectedRoute == null)
+                return;
+
+            await SetActualRouteCargoes(SelectedRoute);
+        }
+
+        private async Task SetActualRouteCargoes(RouteDto selectedRoute)
+        {
+            var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(selectedRoute.Id, new CargoParameters(), false);
+            var mappedCargoes = mapper.Map<IEnumerable<CargoDto>>(cargoes);
+            UpdateSource(routeCargoDt, mappedCargoes);
+
+            await FillRouteFields(selectedRoute);
+        }
+
+        private async Task FillRouteFields(RouteDto selectedOrder)
+        {
+            var transport = await repository.Trucks.GetTruckByRegistrationNumberAsync(selectedOrder.TruckRegistrationNumber, true);
+            driverFIO.Text = transport.Driver.Surname
+                + " " + transport.Driver.Name
+                + " " + transport.Driver.Patronymic;
+            driverNumber.Text = transport.Driver.PhoneNumber;
+        }
+
+        private void RouteCargoDtSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private async void SearchRouteClick(object sender, RoutedEventArgs e)
+        {
+            var parameters = new RouteParameters { Search = routeDtSearch.Text };
+
+            var routes = await repository.Routes.GetAllRoutesAsync(parameters, false);
+            var mappedRoutes = mapper.Map<IEnumerable<RouteDto>>(routes);
+
+            UpdateSource(routeDt, mappedRoutes);
+        }
+
+        private async void RouteDtSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(routeDtSearch.Text))
+            {
+                var routes = await repository.Routes.GetAllRoutesAsync(new RouteParameters(), false);
+                var mappedRoute = mapper.Map<IEnumerable<RouteDto>>(routes);
+
+                UpdateSource(routeDt, mappedRoute);
+            }
+        }
+
+        private async void RouteCargoDtSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(routeCargoDtSearch.Text))
+            {
+                var selectedRoute = GetSelectedRoute();
+                var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(selectedRoute.Id ,new CargoParameters(), false);
+                var mappedCargo = mapper.Map<IEnumerable<CargoDto>>(cargoes);
+
+                UpdateSource(routeCargoDt, mappedCargo);
+            }
+        }
+
+        private async void RouteCargoSearchClick(object sender, RoutedEventArgs e)
+        {
+            var parameters = new CargoParameters { Search = routeCargoDtSearch.Text };
+            var selectedRoute = GetSelectedRoute();
+
+            var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(selectedRoute.Id, parameters, false);
+            var mappedCargoes = mapper.Map<IEnumerable<CargoDto>>(cargoes);
+
+            UpdateSource(routeCargoDt, mappedCargoes);
         }
     }
 }

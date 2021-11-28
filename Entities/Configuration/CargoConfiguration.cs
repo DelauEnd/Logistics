@@ -5,14 +5,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Entities.Configuration
 {
     public class CargoConfiguration : DefaultGuids, IEntityTypeConfiguration<Cargo>
     {
-        public void Configure(EntityTypeBuilder<Cargo> builder)
+        public async void Configure(EntityTypeBuilder<Cargo> builder)
         {
             AddInitialData(builder);
+            await AddTriggers();
+        }
+
+        private async Task AddTriggers()
+        {
+            await DapperExecutor.ExecuteQueryAsync(Queries.OnCargoUpdate);
         }
 
         private void AddInitialData(EntityTypeBuilder<Cargo> builder)

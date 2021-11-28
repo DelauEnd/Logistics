@@ -116,8 +116,18 @@ namespace Repository
         public void ClearTrackers()
             => repositoryContext.ChangeTracker.Clear();
 
-        public async Task SaveAsync() 
-            => await repositoryContext.SaveChangesAsync();
+        public async Task SaveAsync()
+        {
+            await repositoryContext.SaveChangesAsync();
+            await RefreshAllAsync();
+        }
 
+        private async Task RefreshAllAsync()
+        {
+            foreach (var entity in repositoryContext.ChangeTracker.Entries())
+            {
+                await entity.ReloadAsync();
+            }
+        }
     }
 }

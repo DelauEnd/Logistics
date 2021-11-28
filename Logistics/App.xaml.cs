@@ -2,6 +2,7 @@
 using Contracts;
 using Logistics.Extensions;
 using Logistics.Utility;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using System;
@@ -43,6 +44,7 @@ namespace Logistics
             services.AddAutoMapper( c => c.AddProfile(new MappingProfile()));
             services.AddSingleton<ITickTimer, TickTimer>();
             services.AddScoped<IAuthenticationManager, AuthenticationManager>();
+            services.AddScoped<Configuration>();
         }
     }
 }
