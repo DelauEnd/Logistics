@@ -14,42 +14,19 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel>
+
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Text="Статус:" Width="105" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <ComboBox materialDesign:TextFieldAssist.HasClearButton="True"  VerticalAlignment="Center" x:Name="StatusesComboBox" Width="125" Height="25" FontSize="14">
-                        <ComboBox.ItemContainerStyle>
-                            <Style TargetType="ComboBoxItem">
-                                <Setter Property="Height" Value="20"/>
-                                <Setter Property="FontSize" Value="14"/>
-                            </Style>
-                        </ComboBox.ItemContainerStyle>
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Text="Дата отгрузки:" Width="105" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBlock VerticalAlignment="Center" Text="От:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <DatePicker Margin="5,0" Width="100" Name="FromDepartureDatePicker" materialDesign:TextFieldAssist.HasClearButton="True"/>
-                    <TextBlock VerticalAlignment="Center" Text="До:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBlock VerticalAlignment="Center" Text="Дата отгрузки:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                     <DatePicker Margin="5,0" Width="100" Name="ToDepartureDatePicker" materialDesign:TextFieldAssist.HasClearButton="True"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Text="Дата отгрузки:" Width="105" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBlock VerticalAlignment="Center" Text="От:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <DatePicker Margin="5,0" Width="100" Name="FromArrivalDatePicker" materialDesign:TextFieldAssist.HasClearButton="True"/>
-                    <TextBlock VerticalAlignment="Center" Text="До:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBlock VerticalAlignment="Center" Text="Дата выгрузки:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                     <DatePicker Margin="5,0" Width="100" Name="ToArrivalDatePicker" materialDesign:TextFieldAssist.HasClearButton="True"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock VerticalAlignment="Center" Text="Вес (кг):" Width="105" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBlock VerticalAlignment="Center" Text="От:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox Margin="5,0" Width="100" Name="FromWeightBox" materialDesign:TextFieldAssist.HasClearButton="True"/>
-                    <TextBlock VerticalAlignment="Center" Text="До:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox Margin="5,0"  Width="100" Name="ToWeightBox" materialDesign:TextFieldAssist.HasClearButton="True"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Height="25">
-            <CheckBox Content="Использовать фильтры" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+        <Grid Grid.Row="1" Height="25" Margin="5">
+            <Button Content="Применить" Padding="0,0,5s,0"/>
         </Grid>
     </Grid>
 </Window>

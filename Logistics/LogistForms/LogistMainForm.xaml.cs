@@ -362,5 +362,45 @@ namespace Logistics.LogistForms
 
             UpdateSource(routeCargoDt, mappedCargoes);
         }
+
+        private void PopupDateClosed(object sender, RoutedEventArgs e)
+        {
+            arrivalDatePicker.Text = "";
+            departureDatePicker.Text = "";
+        }
+
+        private void PopupDateOpened(object sender, RoutedEventArgs e)
+        {
+            if (GetSelectedCargoRoute() == null)
+                return;
+
+            var selectedCargo = GetSelectedCargoRoute();
+            arrivalDatePicker.SelectedDate = selectedCargo.ArrivalDate;
+            departureDatePicker.SelectedDate = selectedCargo.DepartureDate;
+        }
+
+        private async void ApplyDateClick(object sender, RoutedEventArgs e)
+        {
+            var selectedCargo = GetSelectedCargoRoute();
+            if (selectedCargo == null)
+                return;
+
+            var departureDate = departureDatePicker.SelectedDate;
+            var arrivalDate = arrivalDatePicker.SelectedDate;
+
+            if (MessageBox.Show("Дата будет изменена у всех грузов этой компании", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+                return;
+            
+            var orderToUpdate = await repository.Cargoes.GetCargoByIdAsync(selectedCargo.Id, true);
+
+            orderToUpdate.DepartureDate = departureDate;
+            orderToUpdate.ArrivalDate = arrivalDate;
+
+            await repository.SaveAsync();
+
+            await SetActualRouteCargoes(GetSelectedRoute());
+        }
+
+        
     }
 }

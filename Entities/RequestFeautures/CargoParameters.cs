@@ -6,10 +6,10 @@ namespace Entities.RequestFeautures
 {
     public class CargoParameters : RequestParameters
     {
-        public DateTime ArrivalDateFrom { get; set; } = DateTime.MinValue;
-        public DateTime ArrivalDateTo { get; set; } = DateTime.MaxValue;
+        public DateTime ArrivalDateFrom { get; set; }
+        public DateTime ArrivalDateTo { get; set; }
 
-        public DateTime DepartureDateFrom { get; set; } = DateTime.MinValue;
-        public DateTime DepartureDateTo { get; set; } = DateTime.MaxValue;
+        public DateTime DepartureDateFrom { get; set; }
+        public DateTime DepartureDateTo { get; set; }
     }
 }

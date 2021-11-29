@@ -411,16 +411,38 @@
                                         <TextBlock Text="ГРУЗЫ" Margin="10,20,0,0" FontSize="30" Foreground="{StaticResource MaterialDesignTextAreaBorder}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
                                     </Grid>
                                     <Grid Grid.Row="1">
-                                        <materialDesign:PopupBox Margin="10,0" StaysOpen="True">
+                                        <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10,2,0,0" HorizontalAlignment="Left" Padding="0,-3,0,0" Width="200" Height="30" FontSize="12" Content="Установить дату доставки"/>
+                                        <materialDesign:PopupBox Margin="10,0" Width="200" materialDesign:RippleAssist.IsDisabled="True" Closed="PopupDateClosed" Opened="PopupDateOpened" StaysOpen="True">
+                                            <materialDesign:PopupBox.ToggleContent>
+                                                <materialDesign:PackIcon Kind="DateRange" Foreground="{StaticResource MaterialDesignBackground}"  Height="25" Width="25"/>
+                                            </materialDesign:PopupBox.ToggleContent>
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
                                                     <RowDefinition/>
                                                 </Grid.RowDefinitions>
                                                 <Grid Grid.Row="0">
-                                                    <StackPanel Margin="5">
-                                                        
-                                                    </StackPanel>
+                                                    <Grid Margin="5">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="auto"/>
+                                                            <RowDefinition Height="auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0">
+                                                            <StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock VerticalAlignment="Center" Text="Дата отгрузки:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                                    <DatePicker Margin="5,0" Width="100" Name="departureDatePicker"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock VerticalAlignment="Center" Text="Дата выгрузки:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                                    <DatePicker Margin="5,0" Width="100" Name="arrivalDatePicker"/>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                        <Grid Grid.Row="1">
+                                                            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Height="25" Content="Применить" Click="ApplyDateClick" Margin="0,10,0,0" Padding="0,0,0,7"/>
+                                                        </Grid>
+                                                    </Grid>
                                                 </Grid>
                                             </Grid>
                                         </materialDesign:PopupBox>
@@ -437,7 +459,7 @@
                                             Width="20"
                                             Foreground="{Binding BorderBrush, ElementName=searchTb}"/>
                                         </Grid>
-                                        <Grid Grid.Column="1">
+                                        <Grid Grid.Column="1" Margin="0,2,0,0">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
                                                 <ColumnDefinition Width="auto"/>
