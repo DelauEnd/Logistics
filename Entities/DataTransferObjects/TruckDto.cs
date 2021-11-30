@@ -14,5 +14,9 @@ namespace Entities.DataTransferObjects
         public double LoadCapacity { get; set; }
 
         public Person Driver { get; set; }
+
+        public Dimensions LimitLoad { get; set; }
+
+        public string TransportedCargoTypeId { get; set; }
     }
 }

@@ -177,7 +177,7 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0" Margin="0,10,0,10">
                                             <StackPanel>
-                                                <TextBlock Text="Отправитель" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Получатель" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                                 <TextBlock Text="Адрес:" FontSize="14" Height="45" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                                 <TextBlock Text="Контактное лицо" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                                 <TextBlock Text="ФИО:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
@@ -321,8 +321,8 @@
                                         </Grid.ColumnDefinitions>
                                         <Grid Grid.Column="0">
                                             <StackPanel Orientation="Horizontal" Margin="10,2">
-                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0" Width="190" Height="30" FontSize="12" Content="Сформировать маршрут"/>
-                                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0" Width="190" Height="30" FontSize="12" Click="CreateRouteClick" Content="Сформировать маршрут"/>
+                                                <Button Style="{StaticResource MaterialDesignIconButton}" Click="EditRouteClick" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                     <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
                                                 <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">

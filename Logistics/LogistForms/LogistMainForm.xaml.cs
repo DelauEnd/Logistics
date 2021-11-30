@@ -89,17 +89,6 @@ namespace Logistics.LogistForms
             await SetupUserInfo();
         }
 
-        private void UpdateSource(DataGrid sender, IEnumerable<object> ItemSource, DataGrid relatedTable = null)
-        {
-            sender.ItemsSource = ItemSource;
-
-            if (sender.Items.Count != 0)
-                sender.SelectedItem = sender.Items[0];
-
-            if (sender.SelectedItem == null && relatedTable != null)
-                relatedTable.ItemsSource = null;
-        }
-
         private void OnlyNumericInput(object sender, TextCompositionEventArgs e)
         {
             var box = sender as TextBox;
@@ -401,6 +390,19 @@ namespace Logistics.LogistForms
             await SetActualRouteCargoes(GetSelectedRoute());
         }
 
-        
+        private void CreateRouteClick(object sender, RoutedEventArgs e)
+        {
+            new CreateRouteForm().Show();
+        }
+
+        private async void EditRouteClick(object sender, RoutedEventArgs e)
+        {
+            var selectedRoute = GetSelectedRoute();
+
+            var routeForm = new CreateRouteForm();
+            await routeForm.SetAddedCargoesByRouteId(selectedRoute.Id);
+
+            routeForm.ShowDialog();
+        }
     }
 }

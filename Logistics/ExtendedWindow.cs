@@ -3,6 +3,8 @@ using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using Logistics.Utility;
+using System.Windows.Controls;
+using System.Collections.Generic;
 
 namespace Logistics
 {
@@ -22,5 +24,16 @@ namespace Logistics
 
         public bool draggable { get; set; } = true;
         public bool maximazed { get; set; }
+
+        protected void UpdateSource(DataGrid sender, IEnumerable<object> ItemSource, DataGrid relatedTable = null)
+        {
+            sender.ItemsSource = ItemSource;
+
+            if (sender.Items.Count != 0)
+                sender.SelectedItem = sender.Items[0];
+
+            if (sender.SelectedItem == null && relatedTable != null)
+                relatedTable.ItemsSource = null;
+        }
     }
 }

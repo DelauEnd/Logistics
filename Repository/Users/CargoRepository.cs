@@ -51,7 +51,7 @@ namespace Repository.Users
             .Search(parameters.Search)
             .ToListAsync();
 
-        public async Task<IEnumerable<Cargo>> GetCargoesByRouteIdAsync(Guid id, CargoParameters parameters, bool trackChanges)
+        public async Task<IEnumerable<Cargo>> GetCargoesByRouteIdAsync(Guid? id, CargoParameters parameters, bool trackChanges)
             => await FindByCondition(cargo => cargo.RouteId == id, trackChanges)
             .Include(cargo => cargo.Category)
             .Include(cargo => cargo.Type)

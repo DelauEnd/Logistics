@@ -57,7 +57,7 @@
             </Grid>
             <Grid Grid.Row="3">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <Button Click="BtnCloseClick" Margin="10" Style="{StaticResource MaterialDesignFlatAccentButton}" Width="90" Content="Отмена"/>
+                    <Button Click="BtnCloseClick" Margin="10" Style="{StaticResource MaterialDesignFlatButton}" Width="90" Content="Отмена"/>
                     <Button Click="AuthorizationBtnClick" Margin="10" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="90" Content="Войти"/>
                 </StackPanel>
             </Grid>
