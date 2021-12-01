@@ -9,5 +9,10 @@ namespace Contracts
 {
     public interface ITrailerRepository
     {
+        Task<IEnumerable<Trailer>> GetAllTrailersAsync(bool trackChanges);
+        Task<Trailer> GetTrailerByIdAsync(Guid id, bool trackChanges);
+        Task<Trailer> GetTrailerByRegistrationNumberAsync(string number, bool trackChanges);
+        void CreateTrailer(Trailer trailer);
+        void DeleteTrailer(Trailer trailer);
     }
 }

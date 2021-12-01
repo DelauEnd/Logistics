@@ -14,6 +14,7 @@ namespace Contracts
         Task MarkTheCargoToRouteAsync(Guid cargoId, Guid routeId);
         Task<Cargo> GetCargoByIdAsync(Guid cargoId, bool trackChanges);
         void DeleteCargo(Cargo cargo);
+        void UpdateCargo(Cargo cargo);
         Task<IEnumerable<Cargo>> GetAllCargoesAsync(CargoParameters parameters, bool trackChanges);
     }
 }

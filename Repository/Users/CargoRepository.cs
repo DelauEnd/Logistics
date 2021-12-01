@@ -65,5 +65,10 @@ namespace Repository.Users
             route.RouteId = routeId;
             Update(route);
         }
+
+        public void UpdateCargo(Cargo cargo)
+        {
+            Update(cargo);
+        }
     }
 }

@@ -18,6 +18,8 @@ namespace Entities.Models
         [MaxLength(30)]
         public string RegistrationNumber { get; set; }
 
+        public double LoadCapacity { get; set; }
+
         [Required]
         public Guid TransportedCargoTypeId { get; set; }
         public CargoType TransportedCargoType { get; set; }

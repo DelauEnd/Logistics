@@ -39,5 +39,8 @@ namespace Repository.Users
 
         public void DeleteRoute(Route route)
             => Delete(route);
+
+        public void UpdateRoute(Route route)
+            => Update(route);
     }
 }

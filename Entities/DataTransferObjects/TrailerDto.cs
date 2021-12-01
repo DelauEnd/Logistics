@@ -5,15 +5,13 @@ using System.Text;
 
 namespace Entities.DataTransferObjects
 {
-    public class TruckDto
+    public class TrailerDto
     {
         public Guid Id { get; set; }
 
         public string RegistrationNumber { get; set; }
 
         public double LoadCapacity { get; set; }
-
-        public Person Driver { get; set; }
 
         public Dimensions LimitLoad { get; set; }
 

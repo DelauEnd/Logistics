@@ -122,7 +122,7 @@ namespace Repository
             await RefreshAllAsync();
         }
 
-        private async Task RefreshAllAsync()
+        public async Task RefreshAllAsync()
         {
             foreach (var entity in repositoryContext.ChangeTracker.Entries())
             {

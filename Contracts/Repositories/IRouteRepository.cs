@@ -12,5 +12,6 @@ namespace Contracts
         Task<IEnumerable<Route>> GetAllRoutesAsync(RouteParameters parameters, bool trackChanges);
         void CreateRoute(Route route);
         void DeleteRoute(Route route);
+        void UpdateRoute(Route routeToEdit);
     }
 }

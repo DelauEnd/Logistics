@@ -16,6 +16,7 @@ namespace Logistics
         public MappingProfile()
         {
             CreateTruckMaps();
+            CreateTrailerMaps();
             CreateCargoMaps();
             CreateRouteMaps();
             CreateOrderMaps();
@@ -29,9 +30,16 @@ namespace Logistics
             CreateMap<User, UserDto>();
         }
 
+        private void CreateTrailerMaps()
+        {
+            CreateMap<Trailer, TrailerDto>().ForMember(truck => truck.TransportedCargoType, option
+                  => option.MapFrom(truckDto => truckDto.TransportedCargoType.Title));
+        }
+
         private void CreateTruckMaps()
         {
-            CreateMap<Truck, TruckDto>();
+            CreateMap<Truck, TruckDto>().ForMember(truck=>truck.TransportedCargoType, option
+                => option.MapFrom(truckDto => truckDto.TransportedCargoType.Title));
 
             CreateMap<TruckForCreationDto, Truck>();
 
@@ -48,7 +56,7 @@ namespace Logistics
 
             CreateMap<CargoForUpdateDto, Cargo>().ReverseMap();
 
-            CreateMap<CargoForCreationDto, Cargo>();
+            CreateMap<CargoForRouteCreationDto, Cargo>().ReverseMap();
         }
 
         private void CreateRouteMaps()
@@ -58,6 +66,8 @@ namespace Logistics
                 => option.MapFrom(transport => transport.Truck.RegistrationNumber))
                 .ForMember(routeDto => routeDto.TrailerRegistrationNumber, option => 
                 option.MapFrom(transport => transport.Trailer.RegistrationNumber));
+
+            CreateMap<RouteForCreationDto, Route>().ReverseMap();
         }
 
         private void CreateOrderMaps()

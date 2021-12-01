@@ -11,6 +11,6 @@ namespace Entities.DataTransferObjects
 
         public Guid DestinationId { get; set; }
 
-        public IEnumerable<CargoForCreationDto> Cargoes { get; set; }
+        public IEnumerable<CargoForRouteCreationDto> Cargoes { get; set; }
     }
 }

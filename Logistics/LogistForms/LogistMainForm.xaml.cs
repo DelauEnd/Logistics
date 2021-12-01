@@ -390,19 +390,43 @@ namespace Logistics.LogistForms
             await SetActualRouteCargoes(GetSelectedRoute());
         }
 
-        private void CreateRouteClick(object sender, RoutedEventArgs e)
+        private async void CreateRouteClick(object sender, RoutedEventArgs e)
         {
-            new CreateRouteForm().Show();
+            var routeForm = new CreateRouteForm(UserInfo);
+            routeForm.ShowDialog();
+
+            if (!routeForm.routeCreated)
+                return;
+
+            await routeForm.BuildRoute();
+           
+            repository.ClearTrackers();
+            await SetDefaultRoutes();
         }
+
 
         private async void EditRouteClick(object sender, RoutedEventArgs e)
         {
-            var selectedRoute = GetSelectedRoute();
-
-            var routeForm = new CreateRouteForm();
-            await routeForm.SetAddedCargoesByRouteId(selectedRoute.Id);
-
+            var routeForm = new CreateRouteForm(UserInfo, true);
+            await HandleRouteForm(routeForm);
             routeForm.ShowDialog();
+
+            if (!routeForm.routeCreated)
+                return;
+
+            await routeForm.BuildRoute();
+
+            repository.ClearTrackers();
+            await SetDefaultRoutes();
+        }
+
+        private async Task<CreateRouteForm> HandleRouteForm(CreateRouteForm routeForm)
+        {     
+            var selectedRoute = GetSelectedRoute();
+            await routeForm.SetAddedCargoesByRouteId(selectedRoute.Id);
+            await routeForm.SetTrailerInfoByRegNumber(selectedRoute.TrailerRegistrationNumber);
+            await routeForm.SetTruckInfoByRegNumber(selectedRoute.TruckRegistrationNumber);
+            return routeForm;
         }
     }
 }

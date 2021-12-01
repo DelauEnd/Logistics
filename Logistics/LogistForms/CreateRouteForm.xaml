@@ -52,14 +52,14 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0" Margin="5">
-                                        <DataGrid>
+                                        <DataGrid x:Name="truckDt" SelectionChanged="TrucksDtSelected" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Binding="{Binding RegistrationNumber}">
-                                                    <DataGridTextColumn.Header >
+                                                    <DataGridTextColumn.Header>
                                                         <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
                                                     </DataGridTextColumn.Header>
                                                 </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Тип" Binding="{Binding Sender}"/>
+                                                <DataGridTextColumn Header="Тип" Binding="{Binding TransportedCargoType}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>
@@ -67,34 +67,36 @@
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Выбранный транспорт:" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="15" Width="15">
+                                                <Button VerticalAlignment="Center" Click="CancelTruckClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="15" Width="15">
                                                     <materialDesign:PackIcon Kind="remove" HorizontalAlignment="Center" VerticalAlignment="Center" Height="12" Width="12" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
-                                                <TextBox VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" x:Name="searchOrderTb" Width="100" Style="{StaticResource MaterialDesignTextBox}"/>
+                                                <TextBox VerticalAlignment="Center" Name="selectedTruck" IsReadOnly="true" Height="30" VerticalContentAlignment="Center" Width="100" Style="{StaticResource MaterialDesignTextBox}"/>
                                             </StackPanel>
                                             <TextBlock Text="Характеристика транспорта" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Грузоподъемность:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoWeight" FontSize="14"/>
+                                                <TextBlock Name="cargoWeightTruck" Margin="10,0" Text="-" FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Длинна:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoLength" FontSize="14"/>
+                                                <TextBlock x:Name="cargoLengthTruck" Margin="10,0"  Text="-" FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Ширина:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoWidth" FontSize="14"/>
+                                                <TextBlock x:Name="cargoWidthTruck" Margin="10,0"  Text="-" FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Высота:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoHeight" FontSize="14"/>
+                                                <TextBlock x:Name="cargoHeightTruck" Margin="10,0"  Text="-" FontSize="14"/>
                                             </StackPanel>
                                             <TextBlock Text="Перевозчик" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="ФИО:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock x:Name="carrierFIO" Margin="10,0"  Text="-" FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Номер телефона:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock x:Name="phoneNum" Margin="10,0" Text="-" FontSize="14"/>
                                             </StackPanel>
                                         </StackPanel>
                                     </Grid>
@@ -118,14 +120,14 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <Grid Grid.Column="0" Margin="5">
-                                        <DataGrid>
+                                        <DataGrid Name="trailerDt" SelectionChanged="TrailerDtSelected" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
                                                 <DataGridTextColumn Binding="{Binding RegistrationNumber}">
                                                     <DataGridTextColumn.Header >
                                                         <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
                                                     </DataGridTextColumn.Header>
                                                 </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Тип" Binding="{Binding Sender}"/>
+                                                <DataGridTextColumn Header="Тип" Binding="{Binding TransportedCargoType}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>
@@ -133,27 +135,27 @@
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Выбранный прицеп:" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <Button VerticalAlignment="Center" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="15" Width="15">
+                                                <Button VerticalAlignment="Center" Click="CancelTrailerClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="15" Width="15">
                                                     <materialDesign:PackIcon Kind="remove" HorizontalAlignment="Center" VerticalAlignment="Center" Height="12" Width="12" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
-                                                <TextBox VerticalAlignment="Center" Height="30" VerticalContentAlignment="Center" Width="100" Style="{StaticResource MaterialDesignTextBox}"/>
+                                                <TextBox VerticalAlignment="Center" Name="selectedTrailer" IsReadOnly="true" Height="30" VerticalContentAlignment="Center" Width="100" Style="{StaticResource MaterialDesignTextBox}"/>
                                             </StackPanel>
                                             <TextBlock Text="Характеристика " FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Грузоподъемность:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoWeightTrailer" FontSize="14"/>
+                                                <TextBlock x:Name="cargoWeightTrailer" Margin="10,0" Text="-"  FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Длинна:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoLengthTrailer" FontSize="14"/>
+                                                <TextBlock x:Name="cargoLengthTrailer" Margin="10,0" Text="-"  FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Ширина:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoWidthTrailer" FontSize="14"/>
+                                                <TextBlock x:Name="cargoWidthTrailer" Margin="10,0" Text="-"  FontSize="14"/>
                                             </StackPanel>
                                             <StackPanel Orientation="Horizontal">
                                                 <TextBlock Text="Высота:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                                                <TextBlock x:Name="cargoHeightTrailer" FontSize="14"/>
+                                                <TextBlock x:Name="cargoHeightTrailer" Margin="10,0" Text="-" FontSize="14"/>
                                             </StackPanel>
                                         </StackPanel>
                                     </Grid>
@@ -218,6 +220,18 @@
                             <Grid Grid.Row="1">
 
                             </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" Width="110" Content="Назад"/>
+                                <Button Click="SaveClick" Margin="10" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="110" Content="Сохранить"/>
+                            </StackPanel>
                         </Grid>
                     </TabItem>
                 </TabControl>

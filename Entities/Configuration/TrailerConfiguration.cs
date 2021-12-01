@@ -29,6 +29,7 @@ namespace Entities.Configuration
                 {
                     Id = TrailerGuid,
                     RegistrationNumber = "A06AAA",
+                    LoadCapacity = 200,
                     TransportedCargoTypeId = TypeGuid,              
                 }
             );
