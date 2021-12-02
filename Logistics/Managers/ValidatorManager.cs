@@ -16,18 +16,7 @@ namespace Logistics
         }
 
         private ICargoValidator cargoValidator;
-        private ICargoCategoryValidator cargoCategoryValidator;
         private ICustomerValidator customerValidator;
-
-        public ICargoCategoryValidator CargoCategoryValidator
-        {
-            get
-            {
-                if (cargoCategoryValidator == null)
-                    cargoCategoryValidator = new CargoCategoryValidator(logger);
-                return cargoCategoryValidator;
-            }
-        }
 
         public ICargoValidator CargoValidator
         {

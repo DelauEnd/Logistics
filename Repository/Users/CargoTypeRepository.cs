@@ -17,5 +17,19 @@ namespace Repository.Users
         {
 
         }
+
+        public async Task<IEnumerable<CargoType>> GetAllTypes(bool trackChanges)
+            => await FindAll(trackChanges).ToListAsync();
+
+        public async Task<CargoType> GetTypeByIdAsync(Guid id, bool trackChanges)
+            => await FindByCondition(type => type.Id == id, trackChanges)
+            .SingleOrDefaultAsync();
+
+        public async Task<CargoType> GetTypeByTitleAsync(string title, bool trackChanges)
+            => await FindByCondition(type => type.Title == title, trackChanges)
+            .SingleOrDefaultAsync();
+
+        public void LoadType()
+            => Load();
     }
 }

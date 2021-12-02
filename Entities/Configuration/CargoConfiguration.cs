@@ -11,15 +11,9 @@ namespace Entities.Configuration
 {
     public class CargoConfiguration : DefaultGuids, IEntityTypeConfiguration<Cargo>
     {
-        public async void Configure(EntityTypeBuilder<Cargo> builder)
+        public void Configure(EntityTypeBuilder<Cargo> builder)
         {
             AddInitialData(builder);
-            await AddTriggers();
-        }
-
-        private async Task AddTriggers()
-        {
-            await DapperExecutor.ExecuteQueryAsync(Queries.OnCargoUpdate);
         }
 
         private void AddInitialData(EntityTypeBuilder<Cargo> builder)
@@ -30,7 +24,6 @@ namespace Entities.Configuration
                 {
                     Id = CargoGuid,
                     Title = "Initial Cargo",
-                    CategoryId = CategoryGuid,
                     TypeId = TypeGuid,
                     DepartureDate = DateTime.Now,
                     ArrivalDate = DateTime.Now,

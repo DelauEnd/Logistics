@@ -10,7 +10,6 @@ namespace Repository
     public class RepositoryManager : IRepositoryManager
     {
         private readonly RepositoryContext repositoryContext;
-        private ICargoCategoryRepository cargoCategoryRepository;
         private ICargoRepository cargoRepository;
         private ICustomerRepository customerRepository;
         private IOrderRepository orderRepository;
@@ -23,16 +22,6 @@ namespace Repository
         public RepositoryManager(RepositoryContext repositoryContext)
         {
             this.repositoryContext = repositoryContext;
-        }
-
-        public ICargoCategoryRepository CargoCategories
-        {
-            get
-            {
-                if (cargoCategoryRepository == null)
-                    cargoCategoryRepository = new CargoCategoryRepository(repositoryContext);
-                return cargoCategoryRepository;
-            }
         }
 
         public IUserRepository Users

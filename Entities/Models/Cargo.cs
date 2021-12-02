@@ -33,11 +33,6 @@ namespace Entities.Models
         public Dimensions Dimensions { get; set; }
 
         [Required]
-        [ForeignKey(nameof(CargoCategory))]
-        public Guid CategoryId { get; set; }
-        public CargoCategory Category { get; set; }
-
-        [Required]
         [ForeignKey(nameof(CargoType))]
         public Guid TypeId { get; set; }
         public CargoType Type { get; set; }

@@ -35,8 +35,11 @@ namespace Repository.Users
 
         public async Task<Order> GetOrderByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(order => order.Id == id, trackChanges)
-            .Include(order => order.Cargoes).ThenInclude(cargo => cargo.Category)
+            .Include(order => order.Cargoes).ThenInclude(cargo => cargo.Type)
             .Include(route => route.Destination).Include(route => route.Sender)
             .SingleOrDefaultAsync();
+
+        public void UpdateOrder(Order order)
+            => Update(order);
     }
 }

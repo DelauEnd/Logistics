@@ -8,5 +8,9 @@ namespace Contracts
 {
     public interface ICargoTypeRepository
     {
+        Task<IEnumerable<CargoType>> GetAllTypes(bool trackChanges);
+        void LoadType();
+        Task<CargoType> GetTypeByIdAsync(Guid id, bool trackChanges);
+        Task<CargoType> GetTypeByTitleAsync(string title, bool trackChanges);
     }
 }

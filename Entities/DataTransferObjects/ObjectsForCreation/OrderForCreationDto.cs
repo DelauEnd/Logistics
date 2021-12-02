@@ -7,10 +7,12 @@ namespace Entities.DataTransferObjects
 {
     public class OrderForCreationDto
     {
+        public Guid Id { get; set; }
+
         public Guid SenderId { get; set; }
 
         public Guid DestinationId { get; set; }
 
-        public IEnumerable<CargoForRouteCreationDto> Cargoes { get; set; }
+        public Guid UserId { get; set; }
     }
 }

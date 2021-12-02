@@ -8,7 +8,6 @@ namespace Contracts
 {
     public interface IRepositoryManager
     {
-        ICargoCategoryRepository CargoCategories { get; }
         ICargoTypeRepository Types { get; }
         ICargoRepository Cargoes { get; }
         ICustomerRepository Customers { get; }

@@ -6,11 +6,6 @@ namespace Entities.Configuration
 {
     public class DefaultGuids
     {
-        protected static Guid CategoryGuid 
-        {
-            get { return new Guid("5e48386b-d39b-43b9-8d6f-7c989057eb77"); } 
-        }
-
         protected static Guid CargoGuid 
         { 
             get { return new Guid("136fb0de-da57-4785-aa05-5fda69675661"); } 

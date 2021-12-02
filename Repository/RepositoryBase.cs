@@ -41,5 +41,8 @@ namespace Repository
 
         public void Update(T entity)
             => RepositoryContext.Set<T>().Update(entity);
+
+        public void Load()
+            => RepositoryContext.Set<T>().Load();
     }
 }

@@ -25,7 +25,7 @@ namespace Logistics.LogistForms
     public partial class CreateRouteForm : ExtendedWindow
     {
         private bool forUpdate { get; set; }
-        public bool routeCreated { get; private set; } = false;
+        public bool Created { get; private set; } = false;
         public Guid? routeId { get; set; }
         private AuthenticatedUserInfo UserInfo { get; set; }
 
@@ -97,7 +97,7 @@ namespace Logistics.LogistForms
         {
             routeId = id;
             var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(id, new CargoParameters(), true);
-            var mappedCargoes = mapper.Map<IEnumerable<Cargo>>(cargoes);
+            var mappedCargoes = mapper.Map<IEnumerable<CargoDto>>(cargoes);
 
             UpdateSource(addedCargoes, mappedCargoes);
             addedCargoes.Items.Refresh();
@@ -105,7 +105,7 @@ namespace Logistics.LogistForms
 
         private void SetEmptyAddedCargoes()
         {
-            var cargoes = new List<Cargo>();
+            var cargoes = new List<CargoDto>();
 
             UpdateSource(addedCargoes, cargoes);
         }
@@ -113,18 +113,19 @@ namespace Logistics.LogistForms
         private async Task SetAvailebleCargoes()
         {
             var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(null, new CargoParameters(), true);
+            var mappedCargoes = mapper.Map<IEnumerable<CargoDto>>(cargoes);
 
-            UpdateSource(availebleCargoes, cargoes);
+            UpdateSource(availebleCargoes, mappedCargoes);
         }
 
-        private Cargo GetAvailebleSelectedCargo()
+        private CargoDto GetAvailebleSelectedCargo()
         {
-            return availebleCargoes.SelectedItem as Cargo;
+            return availebleCargoes.SelectedItem as CargoDto;
         }
 
-        private Cargo GetAddedSelectedCargo()
+        private CargoDto GetAddedSelectedCargo()
         {
-            return addedCargoes.SelectedItem as Cargo;
+            return addedCargoes.SelectedItem as CargoDto;
         }
 
         private void AddClick(object sender, RoutedEventArgs e)
@@ -133,8 +134,8 @@ namespace Logistics.LogistForms
             if (selectedCargo == null)
                 return;
 
-            var addedSource = addedCargoes.ItemsSource as List<Cargo>;
-            var availebleSource = availebleCargoes.ItemsSource as List<Cargo>;
+            var addedSource = addedCargoes.ItemsSource as List<CargoDto>;
+            var availebleSource = availebleCargoes.ItemsSource as List<CargoDto>;
 
             addedSource.Add(selectedCargo);
             availebleSource.Remove(selectedCargo);
@@ -150,8 +151,8 @@ namespace Logistics.LogistForms
             if (selectedCargo == null)
                 return;
 
-            var addedSource = addedCargoes.ItemsSource as List<Cargo>;
-            var availebleSource = availebleCargoes.ItemsSource as List<Cargo>;
+            var addedSource = addedCargoes.ItemsSource as List<CargoDto>;
+            var availebleSource = availebleCargoes.ItemsSource as List<CargoDto>;
 
             addedSource.Remove(selectedCargo);
             availebleSource.Add(selectedCargo);
@@ -308,7 +309,7 @@ namespace Logistics.LogistForms
 
         public async Task MarkCargoesToRoute()
         {
-            var cargoes = addedCargoes.ItemsSource as IEnumerable<Cargo>;
+            var cargoes = addedCargoes.ItemsSource as IEnumerable<CargoDto>;
             foreach (var cargo in cargoes)
             {
                 await SetCargoToRoute(cargo, routeId); ;
@@ -317,14 +318,14 @@ namespace Logistics.LogistForms
 
         public async Task UnmarkCargoesFromRoute()
         {
-            var cargoes = availebleCargoes.ItemsSource as IEnumerable<Cargo>;
+            var cargoes = availebleCargoes.ItemsSource as IEnumerable<CargoDto>;
             foreach (var cargo in cargoes)
             {
                 await SetCargoToRoute(cargo, null);
             }
         }
 
-        private async Task SetCargoToRoute(Cargo cargo, Guid? routeId)
+        private async Task SetCargoToRoute(CargoDto cargo, Guid? routeId)
         {
             var cargoToUpdate = await repository.Cargoes.GetCargoByIdAsync(cargo.Id, true);
             cargoToUpdate.RouteId = routeId;
@@ -348,7 +349,7 @@ namespace Logistics.LogistForms
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
-            routeCreated = true;
+            Created = true;
             Close();
         }
     }

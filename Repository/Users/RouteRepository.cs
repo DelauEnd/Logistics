@@ -21,7 +21,7 @@ namespace Repository.Users
 
         public async Task<Route> GetRouteByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(route => route.Id == id, trackChanges)
-            .Include(route => route.Cargoes).ThenInclude(cargo => cargo.Category)
+            .Include(route => route.Cargoes).ThenInclude(cargo => cargo.Type)
             .Include(route => route.Truck)
             .Include(route => route.Trailer)
             .SingleOrDefaultAsync();

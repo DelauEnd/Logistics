@@ -2,13 +2,14 @@
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Threading.Tasks;
+using Xceed.Wpf.Toolkit;
 
 namespace Entities
 {
     public class RepositoryContext : DbContext
     {
         public DbSet<Cargo> Cargoes { get; set; }
-        public DbSet<CargoCategory> Categories { get; set; }
         public DbSet<CargoType> Types { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Route> Routes { get; set; }
@@ -21,6 +22,12 @@ namespace Entities
             : base(options)
         {
             Database.EnsureCreated();
+            ConfigureAdditionals();
+        }
+
+        private void ConfigureAdditionals()
+        {
+            TriggersConfiguration.Configure();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -28,13 +35,13 @@ namespace Entities
             ApplyConfigurations(modelBuilder);
         }
 
+
         private void ApplyConfigurations(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CargoTypeConfiguration());
             modelBuilder.ApplyConfiguration(new TrailerConfiguration());
             modelBuilder.ApplyConfiguration(new CustomerConfiguration());
             modelBuilder.ApplyConfiguration(new TruckConfiguration());
-            modelBuilder.ApplyConfiguration(new CargoCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new CargoConfiguration());
             modelBuilder.ApplyConfiguration(new RouteConfiguration());

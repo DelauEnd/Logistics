@@ -377,7 +377,7 @@ namespace Logistics.LogistForms
             var departureDate = departureDatePicker.SelectedDate;
             var arrivalDate = arrivalDatePicker.SelectedDate;
 
-            if (MessageBox.Show("Дата будет изменена у всех грузов этой компании", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.Cancel)
+            if (MessageBox.Show("Дата будет изменена у всех грузов этого заказа на данном маршруте", "Внимание", MessageBoxButton.OKCancel, MessageBoxImage.Warning) == MessageBoxResult.Cancel)
                 return;
             
             var orderToUpdate = await repository.Cargoes.GetCargoByIdAsync(selectedCargo.Id, true);
@@ -386,7 +386,6 @@ namespace Logistics.LogistForms
             orderToUpdate.ArrivalDate = arrivalDate;
 
             await repository.SaveAsync();
-
             await SetActualRouteCargoes(GetSelectedRoute());
         }
 
@@ -395,7 +394,7 @@ namespace Logistics.LogistForms
             var routeForm = new CreateRouteForm(UserInfo);
             routeForm.ShowDialog();
 
-            if (!routeForm.routeCreated)
+            if (!routeForm.Created)
                 return;
 
             await routeForm.BuildRoute();
@@ -411,7 +410,7 @@ namespace Logistics.LogistForms
             await HandleRouteForm(routeForm);
             routeForm.ShowDialog();
 
-            if (!routeForm.routeCreated)
+            if (!routeForm.Created)
                 return;
 
             await routeForm.BuildRoute();
@@ -427,6 +426,36 @@ namespace Logistics.LogistForms
             await routeForm.SetTrailerInfoByRegNumber(selectedRoute.TrailerRegistrationNumber);
             await routeForm.SetTruckInfoByRegNumber(selectedRoute.TruckRegistrationNumber);
             return routeForm;
+        }
+
+        private async void CreateOrderClick(object sender, RoutedEventArgs e)
+        {
+            var orderForm = new CreateOrderForm(UserInfo);
+            orderForm.ShowDialog();
+
+            if (!orderForm.Created)
+                return;
+
+            await orderForm.BuildOrder();
+            await orderForm.HandleCargoes();
+            await SetDefaultOrders();
+        }
+
+        private async void UpdateOrderClick(object sender, RoutedEventArgs e)
+        {
+            var order = GetSelectedOrder();
+
+            var orderForm = new CreateOrderForm(UserInfo, true);
+
+            await orderForm.SetAddedCargoesByOrderId(order.Id);
+            await orderForm.SetCustomersByOrderId(order.Id);
+            orderForm.ShowDialog();
+
+            if (!orderForm.Created)
+                return;
+
+            await orderForm.BuildOrder();
+            await SetDefaultOrders();
         }
     }
 }

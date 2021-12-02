@@ -5,6 +5,7 @@ using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.ObjectsForUpdate;
 using Entities.Enums;
 using Entities.Models;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -13,6 +14,9 @@ namespace Logistics
 {
     public class MappingProfile : Profile
     {
+        private IRepositoryManager _repository;
+        protected IRepositoryManager repository => _repository ?? (_repository = App.ServiceProvider.GetService<IRepositoryManager>());
+
         public MappingProfile()
         {
             CreateTruckMaps();
@@ -21,7 +25,6 @@ namespace Logistics
             CreateRouteMaps();
             CreateOrderMaps();
             CreateCustomerMaps();
-            CreateCargoCategoryMaps();
             CreateUserMaps();
         }
 
@@ -49,14 +52,12 @@ namespace Logistics
         private void CreateCargoMaps()
         {
             CreateMap<Cargo, CargoDto>()
-                .ForMember(cargoDto => cargoDto.Category, option =>
-                option.MapFrom(cargo => cargo.Category.Title))
                 .ForMember(cargoDto => cargoDto.Type, option =>
                 option.MapFrom(cargo => cargo.Type.Title)).ReverseMap();
 
             CreateMap<CargoForUpdateDto, Cargo>().ReverseMap();
 
-            CreateMap<CargoForRouteCreationDto, Cargo>().ReverseMap();
+            CreateMap<CargoForCreationDto, Cargo>().ReverseMap();
         }
 
         private void CreateRouteMaps()
@@ -100,15 +101,6 @@ namespace Logistics
             CreateMap<CustomerForCreation, Customer>();
 
             CreateMap<CustomerForUpdateDto, Customer>().ReverseMap();
-        }
-
-        private void CreateCargoCategoryMaps()
-        {
-            CreateMap<CargoCategory, CargoCategoryDto>();
-
-            CreateMap<CategoryForCreationDto, CargoCategory>();
-
-            CreateMap<CargoCategoryForUpdateDto, CargoCategory>().ReverseMap();
         }
     }
 }

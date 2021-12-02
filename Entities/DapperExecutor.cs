@@ -14,20 +14,20 @@ namespace Entities
             return ConfigurationManager.ConnectionStrings["cs"].ConnectionString;
         }
 
-        public static async Task ExecuteQueryAsync(string query)
+        public static void ExecuteQuery(string query)
         {
             try
             {
-                await ExecuteAsync(query);
+                Execute(query);
             }
             catch { }           
         }
 
-        private async static Task ExecuteAsync(string query)
+        private static void Execute(string query)
         {
             using (var db = new SqlConnection(GetConString()))
             {
-               await db.QueryAsync(query);
+               db.Query(query);
             }
         }
 

@@ -87,8 +87,8 @@
                                     </Grid>
                                     <Grid Grid.Row="1">
                                         <StackPanel Orientation="Horizontal" Margin="10,2">
-                                            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="190" Height="30" FontSize="12" Padding="0,-3,0,0" Content="Сформировать заказ"/>
-                                            <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="CreateOrderClick" Width="190" Height="30" FontSize="12" Padding="0,-3,0,0" Content="Сформировать заказ"/>
+                                            <Button Style="{StaticResource MaterialDesignIconButton}" Click="UpdateOrderClick" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                 <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
                                             <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">

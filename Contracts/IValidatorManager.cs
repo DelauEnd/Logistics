@@ -8,7 +8,6 @@ namespace Contracts
     public interface IValidatorManager
     {
         ICargoValidator CargoValidator { get; }
-        ICargoCategoryValidator CargoCategoryValidator { get; }
         ICustomerValidator CustomerValidator { get; }
     }
 }

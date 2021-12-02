@@ -20,11 +20,8 @@ namespace Repository.Users
 
         }
 
-        public void CreateCargoForOrder(Cargo cargo, Guid OrderId)
-        {
-            cargo.OrderId = OrderId;
-            Create(cargo);
-        }
+        public void CreateCargo(Cargo cargo)
+            => Create(cargo);
 
         public void DeleteCargo(Cargo cargo)
         {
@@ -33,19 +30,18 @@ namespace Repository.Users
 
         public async Task<IEnumerable<Cargo>> GetAllCargoesAsync(CargoParameters parameters, bool trackChanges)
          => await FindAll(trackChanges)
-            .Include(cargo => cargo.Category)
+            .Include(cargo => cargo.Type)
             .ApplyFilters(parameters)
             .Search(parameters.Search)
             .ToListAsync();
 
         public async Task<Cargo> GetCargoByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(cargo => cargo.Id == id, trackChanges)
-            .Include(cargo => cargo.Category)
+            .Include(cargo => cargo.Type)
             .SingleOrDefaultAsync();
 
         public async Task<IEnumerable<Cargo>> GetCargoesByOrderIdAsync(Guid id, CargoParameters parameters, bool trackChanges)
             => await FindByCondition(cargo => cargo.OrderId == id, trackChanges)
-            .Include(cargo => cargo.Category)
             .Include(cargo => cargo.Type)
             .ApplyFilters(parameters)
             .Search(parameters.Search)
@@ -53,7 +49,6 @@ namespace Repository.Users
 
         public async Task<IEnumerable<Cargo>> GetCargoesByRouteIdAsync(Guid? id, CargoParameters parameters, bool trackChanges)
             => await FindByCondition(cargo => cargo.RouteId == id, trackChanges)
-            .Include(cargo => cargo.Category)
             .Include(cargo => cargo.Type)
             .ApplyFilters(parameters)
             .Search(parameters.Search)
