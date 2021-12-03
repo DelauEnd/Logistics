@@ -7,7 +7,7 @@ namespace Entities.Utility
 {
     public class AuthenticatedUserInfo
     {
-        public EUserRole Role { get; set; }
+        public UserRole Role { get; set; }
         public Guid userId { get; set; }
     }
 }

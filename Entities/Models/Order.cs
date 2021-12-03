@@ -16,7 +16,7 @@ namespace Entities.Models
         public Guid Id { get; set; }
 
         [Required]
-        public EStatuses Status { get; set; } = EStatuses.PROCESSING;
+        public Status Status { get; set; } = Status.Processing;
 
         [Required]
         public Guid SenderId { get; set; }

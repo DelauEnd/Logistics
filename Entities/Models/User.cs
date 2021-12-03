@@ -16,7 +16,7 @@ namespace Entities.Models
         public Guid Id { get; set; }
 
         [Required]
-        public EUserRole Role { get; set; }
+        public UserRole Role { get; set; }
 
         [Required]
         public Person ContactPerson { get; set; }

@@ -81,14 +81,14 @@ namespace Logistics
 
             CreateMap<OrderForCreationDto, Order>()
                 .ForMember(order => order.Status, option =>
-                option.MapFrom(orderForCreation => EStatuses.PROCESSING));
+                option.MapFrom(orderForCreation => Status.Processing));
 
             CreateMap<OrderForUpdateDto, Order>()
                 .ForMember(order => order.Status, option =>
                 option.MapFrom(order => 
-                    Enum.IsDefined(typeof(EStatuses), order.Status) ?
-                    Enum.Parse(typeof(EStatuses), order.Status) :
-                    EStatuses.PROCESSING))
+                    Enum.IsDefined(typeof(Status), order.Status) ?
+                    Enum.Parse(typeof(Status), order.Status) :
+                    Status.Processing))
                 .ReverseMap()
                 .ForMember(updateOrder => updateOrder.Status, option  =>  
                 option.MapFrom(order => order.Status.ToString()));

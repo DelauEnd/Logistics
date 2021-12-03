@@ -17,6 +17,7 @@ using Logistics.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using Logistics.LogistForms;
 using Entities.Enums;
+using Logistics.AdminForms;
 
 namespace Logistics
 {
@@ -62,10 +63,10 @@ namespace Logistics
             if (user == null)
                 return;
 
-            if (user.Role == EUserRole.LOGIST)
+            if (user.Role == UserRole.Logist)
                 new LogistMainForm(user).Show();
-            else
-                ;
+            else if (user.Role == UserRole.Admin)
+                new AdminMainForm(user).Show();
 
             Close();
         }

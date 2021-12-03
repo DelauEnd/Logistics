@@ -15,6 +15,8 @@ namespace Entities.Configuration
         private static void AddTriggers()
         {
             DapperExecutor.ExecuteQuery(Queries.OnCargoUpdate);
+            DapperExecutor.ExecuteQuery(Queries.OnCargoCreate);
+            DapperExecutor.ExecuteQuery(Queries.SetCompletedOrderStatusIfAllCargoesAreCompleted);
         }
     }
 }

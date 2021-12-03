@@ -29,7 +29,7 @@ namespace Entities.Configuration
                     ArrivalDate = DateTime.Now,
                     RouteId = RouteGuid,
                     OrderId = OrderGuid,
-                    Status = EStatuses.PROCESSING,
+                    Status = Status.Processing,
                     Weight = 200,                           
                 }
             );

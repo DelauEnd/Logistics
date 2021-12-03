@@ -11,7 +11,7 @@ namespace Contracts.Repositories
     {
         public Task<Guid> GetUserIdByLoginIfExistAsync(string login);
         public Task<string> GetPasswordHashByIdAsync(Guid id);
-        public Task<EUserRole> GetRoleByIdAsync(Guid userGuid);
+        public Task<UserRole> GetRoleByIdAsync(Guid userGuid);
         public Task<User> GetUserByIdAsync(Guid id, bool trackChanges);
     }
 }

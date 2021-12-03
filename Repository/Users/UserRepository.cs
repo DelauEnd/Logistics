@@ -30,7 +30,7 @@ namespace Repository.Users
             return user.AccountInfo.PasswordHashString;
         }
 
-        public async Task<EUserRole> GetRoleByIdAsync(Guid id)
+        public async Task<UserRole> GetRoleByIdAsync(Guid id)
         {
             var user = await FindByCondition(user => user.Id == id, false)
             .FirstOrDefaultAsync();

@@ -20,7 +20,7 @@ namespace Entities.Models
         public string Title { get; set; }
 
         [Required]
-        public EStatuses Status { get; set; } = EStatuses.PROCESSING;
+        public Status Status { get; set; } = Status.Processing;
 
         public DateTime? DepartureDate { get; set; }
 

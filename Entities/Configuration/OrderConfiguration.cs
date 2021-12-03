@@ -36,7 +36,7 @@ namespace Entities.Configuration
                     UserId = UserGuid,
                     DestinationId = CustomerGuid,
                     SenderId = CustomerGuid,
-                    Status = Enums.EStatuses.PROCESSING,
+                    Status = Enums.Status.Processing,
                 }
             );
         }

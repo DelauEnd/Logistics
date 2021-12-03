@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Entities.Enums
 {
-    public enum EStatuses
+    public enum UserRole
     {
-        PROCESSING,
-        IN_PROGRESS,
-        COMPLETED
+        Admin,
+        Logist
     }
 }

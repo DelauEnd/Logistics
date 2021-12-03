@@ -22,7 +22,7 @@ namespace Entities.Configuration
                 new User
                 {
                     Id = UserGuid,
-                    Role = Enums.EUserRole.LOGIST
+                    Role = Enums.UserRole.Logist
                 }
             );
 

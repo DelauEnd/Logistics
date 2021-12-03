@@ -27,7 +27,7 @@
             <StackPanel Grid.Row="1" Margin="10">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Адрес:" VerticalAlignment="Top" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox Text="debugHolder" Padding="0,2" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                    <TextBox Padding="0,2" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
                              x:Name="addressCustomer" TextWrapping="Wrap" VerticalAlignment="Stretch" 
                              VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" Margin="10,0" Height="50" Width="227"/>
                 </StackPanel>
