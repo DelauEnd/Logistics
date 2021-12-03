@@ -68,23 +68,22 @@
                                         </StackPanel>
                                         <DataGrid Grid.Row="1" x:Name="senderDt" SelectionChanged="SenderDtSelectionChanged" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Binding="{Binding RegistrationNumber}">
-                                                    <DataGridTextColumn.Header>
-                                                        <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
-                                                    </DataGridTextColumn.Header>
-                                                </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Тип" Binding="{Binding TransportedCargoType}"/>
+                                                <DataGridTextColumn Header="Номер" Width="100" Binding="{Binding Id}"/>
+                                                <DataGridTextColumn Header="Адрес" Width="290" Binding="{Binding Address}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="5,8,5,5">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Откуда:" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Адрес:" VerticalAlignment="Top" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                                 <TextBox
                                                 Text="-"
                                                 ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                                Padding="0,1,0,0"
+                                                MaxHeight="90"
                                                 x:Name="addressSender"
+                                                Margin="10,0" 
                                                 TextWrapping="Wrap"
                                                 VerticalAlignment="Stretch"
                                                 VerticalScrollBarVisibility="Auto"
@@ -141,23 +140,22 @@
                                         </StackPanel>
                                         <DataGrid Grid.Row="1" Name="destinationDt" SelectionChanged="DestinationDtSelectionChanged" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                             <DataGrid.Columns>
-                                                <DataGridTextColumn Binding="{Binding RegistrationNumber}">
-                                                    <DataGridTextColumn.Header >
-                                                        <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
-                                                    </DataGridTextColumn.Header>
-                                                </DataGridTextColumn>
-                                                <DataGridTextColumn Header="Тип" Binding="{Binding TransportedCargoType}"/>
+                                                <DataGridTextColumn Header="Номер" Width="100" Binding="{Binding Id}"/>
+                                                <DataGridTextColumn Header="Адрес" Width="290" Binding="{Binding Address}"/>
                                             </DataGrid.Columns>
                                         </DataGrid>
                                     </Grid>
                                     <Grid Grid.Column="1" Margin="5,8,5,5">
                                         <StackPanel>
                                             <StackPanel Orientation="Horizontal">
-                                                <TextBlock Text="Куда:" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Адрес:" VerticalAlignment="Top" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                                                 <TextBox
                                                 Text="-"
                                                 ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                                Padding="0,1,0,0"
+                                                MaxHeight="90"
                                                 x:Name="addressDestination"
+                                                Margin="10,0" 
                                                 TextWrapping="Wrap"
                                                 VerticalAlignment="Stretch"
                                                 VerticalScrollBarVisibility="Auto"
@@ -207,14 +205,12 @@
                                             <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                         </Button>
                                     </StackPanel>
-                                    <DataGrid Grid.Row="1" x:Name="cargoesDt" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
+                                    <DataGrid Grid.Row="1" x:Name="cargoesDt" MinColumnWidth="50" ColumnWidth="100" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Binding="{Binding RegistrationNumber}">
-                                                <DataGridTextColumn.Header>
-                                                    <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
-                                                </DataGridTextColumn.Header>
-                                            </DataGridTextColumn>
-                                            <DataGridTextColumn Header="Тип" Binding="{Binding TransportedCargoType}"/>
+                                            <DataGridTextColumn Header="Номер" Binding="{Binding Id}"/>
+                                            <DataGridTextColumn Header="Наименование" Binding="{Binding Title}"/>
+                                            <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
+                                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
                                         </DataGrid.Columns>
                                     </DataGrid>
                                 </Grid>

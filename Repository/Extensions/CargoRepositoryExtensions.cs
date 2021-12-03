@@ -26,7 +26,9 @@ namespace Repository.Extensions
             return cargoes.Where(cargoes =>
                    cargoes.Title.Contains(searchValues) ||
                    cargoes.Type.Title.Contains(searchValues) ||
-                   cargoes.Id.ToString().Contains(searchValues));
+                   cargoes.Id.ToString().Contains(searchValues) ||
+                   cargoes.OrderId.ToString().Contains(searchValues) ||
+                   cargoes.RouteId.ToString().Contains(searchValues));
         }
     }
 }

@@ -166,22 +166,51 @@ namespace Logistics.LogistForms
             }
         }
 
-        private void AddCustomerClick(object sender, RoutedEventArgs e)
+        private void RefreshCustomerDt()
         {
-            var orderForm = new CreateCustomerForm();
-            orderForm.ShowDialog();
+            senderDt.Items.Refresh();
+            destinationDt.Items.Refresh();
         }
 
-        private void EditSenderClick(object sender, RoutedEventArgs e)
+        private async void AddCustomerClick(object sender, RoutedEventArgs e)
         {
-            var orderForm = new CreateCustomerForm(true);
-            orderForm.ShowDialog();
+            var customerForm = new CreateCustomerForm();
+            customerForm.ShowDialog();
+
+            if (!customerForm.Created)
+                return;
+
+            await customerForm.BuildCargo();
+            await SetAvailebleCustomers();
+            RefreshCustomerDt();
         }
 
-        private void EditDestinationClick(object sender, RoutedEventArgs e)
+        private async void EditSenderClick(object sender, RoutedEventArgs e)
         {
-            var orderForm = new CreateCustomerForm(true);
-            orderForm.ShowDialog();
+            var selectedSender = GetSelectedSender();
+
+            await EditCustomer(selectedSender);
+        }
+
+        private async void EditDestinationClick(object sender, RoutedEventArgs e)
+        {
+            var selectedDestination = GetSelectedDestination();
+
+            await EditCustomer(selectedDestination);
+        }
+
+        private async Task EditCustomer(CustomerDto selectedCustomer)
+        {
+            var customerForm = new CreateCustomerForm(true);
+            customerForm.SetCustomerInfo(selectedCustomer);
+            customerForm.ShowDialog();
+
+            if (!customerForm.Created)
+                return;
+
+            await customerForm.BuildCargo();
+            await SetAvailebleCustomers();
+            RefreshCustomerDt();
         }
 
         private CustomerDto GetSelectedDestination()
@@ -211,8 +240,8 @@ namespace Logistics.LogistForms
         private void SetSenderInfo(CustomerDto selectedSender)
         {
             addressSender.Text = selectedSender.Address;
-            senderFIO.Text = selectedSender.ContactPerson.Name + " "
-                + selectedSender.ContactPerson.Surname + " "
+            senderFIO.Text = selectedSender.ContactPerson.Surname + " "
+                + selectedSender.ContactPerson.Name + " "
                 + selectedSender.ContactPerson.Patronymic;
             senderPhoneNum.Text = selectedSender.ContactPerson.PhoneNumber;
         }
@@ -229,8 +258,8 @@ namespace Logistics.LogistForms
         private void SetDestinationInfo(CustomerDto selectedDestination)
         {
             addressDestination.Text = selectedDestination.Address;
-            destinationFIO.Text = selectedDestination.ContactPerson.Name + " "
-                + selectedDestination.ContactPerson.Surname + " "
+            destinationFIO.Text = selectedDestination.ContactPerson.Surname + " "
+                + selectedDestination.ContactPerson.Name + " "
                 + selectedDestination.ContactPerson.Patronymic;
             destinationPhoneNum.Text = selectedDestination.ContactPerson.PhoneNumber;
         }
@@ -291,7 +320,10 @@ namespace Logistics.LogistForms
             if (cargoToHandle == null)
                 repository.Cargoes.CreateCargo(mappedCargo);
             else
+            {
+                mappedCargo.RouteId = cargoToHandle.RouteId;
                 repository.Cargoes.UpdateCargo(mappedCargo);
+            }
             await repository.SaveAsync();
         }
 

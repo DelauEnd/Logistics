@@ -28,42 +28,53 @@
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Адрес:" VerticalAlignment="Top" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                     <TextBox Text="debugHolder" Padding="0,2" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
-                             x:Name="addressSender" TextWrapping="Wrap" VerticalAlignment="Stretch" 
-                             VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" IsReadOnly="True" Height="50" Width="237"/>
+                             x:Name="addressCustomer" TextWrapping="Wrap" VerticalAlignment="Stretch" 
+                             VerticalScrollBarVisibility="Auto" SpellCheck.IsEnabled="True" Margin="10,0" Height="50" Width="227"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Координаты:" VerticalAlignment="Top" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBlock Text="Координаты:" VerticalAlignment="Center" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                     <Grid Margin="0,3">
                         <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10,2,0,0" HorizontalAlignment="Left" Padding="0,-3,0,0" Width="150" Height="20" FontSize="12" Content="Установить координаты"/>
                         <materialDesign:PopupBox Margin="10,0" Width="150" materialDesign:RippleAssist.IsDisabled="True" StaysOpen="True">
                             <materialDesign:PopupBox.ToggleContent>
                                 <TextBlock/>
                             </materialDesign:PopupBox.ToggleContent>
-                            
+                            <Grid Margin="5">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Долгота:" VerticalAlignment="Center" FontSize="14" Width="50" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                        <TextBox x:Name="lngText" Width="80" Margin="10,0" FontSize="14"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Широта:" HorizontalAlignment="Center" FontSize="14" Width="50" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                        <TextBox x:Name="latText" Width="80" Margin="10,0" FontSize="14"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Grid>
                         </materialDesign:PopupBox>
                     </Grid>
                 </StackPanel>
                 <TextBlock Text="Контактное лицо" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Фамилия:" FontSize="14" Width="120" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox x:Name="customerSurname" Width="150" Margin="10,0"  Text="-" FontSize="14"/>
+                    <TextBlock Text="Фамилия:" FontSize="14" VerticalAlignment="Center" Width="120" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBox x:Name="customerSurname" Width="150" Margin="10,0" FontSize="14"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Имя:" FontSize="14" Width="120" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox x:Name="customerName" Width="150" Margin="10,0"  Text="-" FontSize="14"/>
+                    <TextBlock Text="Имя:" FontSize="14" VerticalAlignment="Center" Width="120" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBox x:Name="customerName" Width="150" Margin="10,0" FontSize="14"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Отчество:" FontSize="14" Width="120" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox x:Name="customerPatronymic" Width="150" Margin="10,0"  Text="-" FontSize="14"/>
+                    <TextBlock Text="Отчество:" FontSize="14" VerticalAlignment="Center" Width="120" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBox x:Name="customerPatronymic" Width="150" Margin="10,0" FontSize="14"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Номер телефона:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <TextBox x:Name="senderPhoneNum" Width="150" Margin="10,0" Text="-" FontSize="14"/>
+                    <TextBlock Text="Номер телефона:" VerticalAlignment="Center" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBox x:Name="customerPhoneNum" Width="150" Margin="10,0" FontSize="14"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" Width="110" Content="Отмена"/>
-                <Button Margin="10" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="110" Content="Сохранить"/>
+                <Button Margin="10" Click="SaveClick" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="110" Content="Сохранить"/>
             </StackPanel>
         </Grid>
     </Border>

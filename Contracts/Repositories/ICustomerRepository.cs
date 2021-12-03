@@ -13,5 +13,6 @@ namespace Contracts
         Task<Customer> GetCustomerByIdAsync(Guid id, bool trackChanges);
         void CreateCustomer(Customer customer);
         void DeleteCustomer(Customer customer);
+        void UpdateCustomer(Customer customer);
     }
 }

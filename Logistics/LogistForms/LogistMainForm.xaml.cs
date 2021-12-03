@@ -118,7 +118,7 @@ namespace Logistics.LogistForms
             else if (tabIndex == 1 && !routesLoaded)
                 await SetDefaultRoutes();
             else if (tabIndex == 2)
-                ;
+                MessageBox.Show("Это вы зря сюда жмакнули, вкладка еще не готова", "жмак", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
         }
 
         private async Task SetupUserInfo()
@@ -455,6 +455,7 @@ namespace Logistics.LogistForms
                 return;
 
             await orderForm.BuildOrder();
+            await orderForm.HandleCargoes();
             await SetDefaultOrders();
         }
     }

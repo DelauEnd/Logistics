@@ -30,7 +30,13 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Тип:" VerticalAlignment="Center" FontSize="14" Width="70"  Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
-                    <ComboBox x:Name="cargoType" Width="150" Margin="10,0" FontSize="14"/>
+                    <ComboBox x:Name="cargoType" Width="150" Margin="10,0" FontSize="14" ItemsSource="{Binding }">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="14" Text="{Binding Title}" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Вес:" VerticalAlignment="Center" Width="70" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>

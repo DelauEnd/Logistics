@@ -41,5 +41,8 @@ namespace Repository.Users
             => await FindByCondition(sender =>
             sender.OrderSender.Where(order => order.Id == id).Any(), trackChanges)
             .SingleOrDefaultAsync();
+
+        public void UpdateCustomer(Customer customer)
+            => Update(customer);
     }
 }

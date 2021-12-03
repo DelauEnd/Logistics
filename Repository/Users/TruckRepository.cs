@@ -25,14 +25,17 @@ namespace Repository.Users
 
         public async Task<IEnumerable<Truck>> GetAllTrucksAsync(bool trackChanges)
             => await FindAll(trackChanges)
+            .Include(truck => truck.TransportedCargoType)
             .ToListAsync();
 
         public async Task<Truck> GetTruckByIdAsync(Guid id, bool trackChanges)
             => await FindByCondition(truck => truck.Id == id, trackChanges)
+            .Include(truck => truck.TransportedCargoType)
             .SingleOrDefaultAsync();
 
         public async Task<Truck> GetTruckByRegistrationNumberAsync(string number, bool trackChanges)
             => await FindByCondition(truck => truck.RegistrationNumber == number, trackChanges)
+            .Include(truck => truck.TransportedCargoType)
             .SingleOrDefaultAsync();
     }
 }

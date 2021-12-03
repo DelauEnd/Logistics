@@ -98,7 +98,7 @@ namespace Logistics
         {
             CreateMap<Customer, CustomerDto>();
 
-            CreateMap<CustomerForCreation, Customer>();
+            CreateMap<CustomerForCreationDto, Customer>();
 
             CreateMap<CustomerForUpdateDto, Customer>().ReverseMap();
         }
