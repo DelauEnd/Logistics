@@ -18,6 +18,9 @@ namespace Repository.Users
 
         }
 
+        public void CreateType(CargoType cargoType)
+            => Create(cargoType);
+
         public async Task<IEnumerable<CargoType>> GetAllTypes(bool trackChanges)
             => await FindAll(trackChanges).ToListAsync();
 
@@ -31,5 +34,8 @@ namespace Repository.Users
 
         public void LoadType()
             => Load();
+
+        public void UpdateType(CargoType cargoType)
+            => Update(cargoType);
     }
 }

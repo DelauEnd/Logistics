@@ -19,19 +19,18 @@ namespace Entities.Models.OwnedModels
         [MaxLength(30)]
         public string Password
         {
-            private get
-            {
-                return Password;
-            }
-            set
-            {
-                Password = value;
-                PasswordHashString = AuthenticationUtility.CalculateStringHash(value);
-            }
+            private get;
+            set;
         }
 
         [Required]
         [MaxLength(256)]
         public string PasswordHashString {get; private set; }
+
+        public void InitPasswordHash()
+        {
+            var hash = AuthenticationUtility.CalculateStringHash(Password);
+            PasswordHashString = hash;
+        }
     }
 }

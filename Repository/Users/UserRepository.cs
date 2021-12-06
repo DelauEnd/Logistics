@@ -60,5 +60,14 @@ namespace Repository.Users
             => await FindByCondition(user =>
             user.Id == id, trackChanges)
             .SingleOrDefaultAsync();
+
+        public async Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges)
+            => await FindAll(trackChanges).ToListAsync();
+
+        public void CreateUser(User user)
+            => Create(user);
+
+        public void UpdateUser(User user)
+            => Update(user);
     }
 }

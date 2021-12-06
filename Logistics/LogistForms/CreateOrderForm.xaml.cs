@@ -32,7 +32,7 @@ namespace Logistics.LogistForms
         public CreateOrderForm(AuthenticatedUserInfo userInfo, bool forUpdate = false)
         {
             InitializeComponent();
-            this.SetupWindowsStyle();
+            this.SetupWindowStyle();
             firstTab.IsChecked = true;
             this.forUpdate = forUpdate;
             this.UserInfo = userInfo;
@@ -136,7 +136,7 @@ namespace Logistics.LogistForms
             if (selectedCargo == null)
                 return;
 
-            var cargoForm = new CreateCargoForm(true);
+            var cargoForm = new CreateCargoForm();
             await cargoForm.SetCargoInfo(selectedCargo);
             cargoForm.ShowDialog();
 

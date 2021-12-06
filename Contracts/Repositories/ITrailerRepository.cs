@@ -14,5 +14,6 @@ namespace Contracts
         Task<Trailer> GetTrailerByRegistrationNumberAsync(string number, bool trackChanges);
         void CreateTrailer(Trailer trailer);
         void DeleteTrailer(Trailer trailer);
+        void UpdateTrailer(Trailer trailer);
     }
 }

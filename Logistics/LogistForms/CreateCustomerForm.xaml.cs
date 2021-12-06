@@ -30,7 +30,7 @@ namespace Logistics.LogistForms
         public CreateCustomerForm(bool forUpdate = false)
         {
             InitializeComponent();
-            this.SetupWindowsStyle();
+            this.SetupWindowStyle();
             this.ForUpdate = forUpdate;
         }
 
@@ -90,8 +90,8 @@ namespace Logistics.LogistForms
                 Address = addressCustomer.Text,
                 Coordinates = new LatLng
                 {
-                    Latitude = int.Parse(latText.Text),
-                    Longitude = int.Parse(lngText.Text)
+                    Latitude = double.Parse(latText.Text),
+                    Longitude = double.Parse(lngText.Text)
                 },
                 ContactPerson = new Person
                 {

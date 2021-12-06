@@ -1,4 +1,5 @@
-﻿using Entities.Models;
+﻿using Entities.DataTransferObjects;
+using Entities.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,7 @@ namespace Contracts
         void LoadType();
         Task<CargoType> GetTypeByIdAsync(Guid id, bool trackChanges);
         Task<CargoType> GetTypeByTitleAsync(string title, bool trackChanges);
+        void CreateType(CargoType editedType);
+        void UpdateType(CargoType editedType);
     }
 }

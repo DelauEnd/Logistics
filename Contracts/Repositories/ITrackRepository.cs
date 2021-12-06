@@ -14,5 +14,6 @@ namespace Contracts
         Task<Truck> GetTruckByRegistrationNumberAsync(string number, bool trackChanges);
         void CreateTruck(Truck truck);
         void DeleteTruck(Truck truck);
+        void UpdateTruck(Truck truckToEdit);
     }
 }

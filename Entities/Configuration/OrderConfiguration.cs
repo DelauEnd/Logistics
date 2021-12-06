@@ -33,7 +33,7 @@ namespace Entities.Configuration
                 new Order
                 {
                     Id = OrderGuid,
-                    UserId = UserGuid,
+                    UserId = LogistGuid,
                     DestinationId = CustomerGuid,
                     SenderId = CustomerGuid,
                     Status = Enums.Status.Processing,

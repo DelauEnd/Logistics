@@ -32,7 +32,7 @@ namespace Logistics
         public MainWindow()
         {
             InitializeComponent();
-            this.SetupWindowsStyle();
+            this.SetupWindowStyle();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)

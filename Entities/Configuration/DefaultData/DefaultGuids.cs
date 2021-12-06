@@ -48,9 +48,15 @@ namespace Entities.Configuration
 
         }
 
-        protected static Guid UserGuid
+        protected static Guid LogistGuid
         {
             get { return new Guid("76c8ab55-452b-4657-b8ba-09aa76939ab4"); }
+
+        }
+
+        protected static Guid AdminGuid
+        {
+            get { return new Guid("421da925-6554-4e4b-a177-1e465795f36a"); }
 
         }
     }

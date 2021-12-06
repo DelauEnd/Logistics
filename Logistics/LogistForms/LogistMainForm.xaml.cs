@@ -35,7 +35,7 @@ namespace Logistics.LogistForms
         public LogistMainForm(AuthenticatedUserInfo user)
         {
             InitializeComponent();
-            this.SetupWindowsStyle();
+            this.SetupWindowStyle();
             ResizeMode = ResizeMode.CanResizeWithGrip;
             UserInfo = user;
             orderTabBtn.IsChecked = true;
@@ -399,7 +399,6 @@ namespace Logistics.LogistForms
 
             await routeForm.BuildRoute();
            
-            repository.ClearTrackers();
             await SetDefaultRoutes();
         }
 
@@ -415,7 +414,6 @@ namespace Logistics.LogistForms
 
             await routeForm.BuildRoute();
 
-            repository.ClearTrackers();
             await SetDefaultRoutes();
         }
 

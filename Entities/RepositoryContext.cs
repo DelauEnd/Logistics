@@ -35,7 +35,6 @@ namespace Entities
             ApplyConfigurations(modelBuilder);
         }
 
-
         private void ApplyConfigurations(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CargoTypeConfiguration());

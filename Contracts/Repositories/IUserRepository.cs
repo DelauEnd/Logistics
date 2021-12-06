@@ -1,4 +1,5 @@
-﻿using Entities.Enums;
+﻿using Entities.DataTransferObjects;
+using Entities.Enums;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -13,5 +14,8 @@ namespace Contracts.Repositories
         public Task<string> GetPasswordHashByIdAsync(Guid id);
         public Task<UserRole> GetRoleByIdAsync(Guid userGuid);
         public Task<User> GetUserByIdAsync(Guid id, bool trackChanges);
+        public Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
+        void CreateUser(User user);
+        void UpdateUser(User user);
     }
 }

@@ -21,7 +21,7 @@ namespace Entities.Configuration
                 new Route
                 {
                     Id = RouteGuid,
-                    UserId = UserGuid,
+                    UserId = LogistGuid,
                     TruckId = TruckGuid,                      
                 }
             );

@@ -12,25 +12,38 @@ namespace Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
+            ConfigureModel(builder);
             AddInitialData(builder);
         }
 
+        private void ConfigureModel(EntityTypeBuilder<User> builder)
+        {
+            builder.OwnsOne(user => user.AccountInfo).HasIndex(info => info.Login).IsUnique(true);
+        }
+
         private void AddInitialData(EntityTypeBuilder<User> builder)
+        {
+            BuildLogist(builder);
+            BuildAdmin(builder);
+        }
+
+        private static void BuildLogist(EntityTypeBuilder<User> builder)
         {
             builder.HasData
             (
                 new User
                 {
-                    Id = UserGuid,
+                    Id = LogistGuid,
                     Role = Enums.UserRole.Logist
                 }
             );
 
-            builder.OwnsOne(user => user.ContactPerson).HasData
+            builder.OwnsOne
+            (user => user.ContactPerson).HasData
             (
                 new
                 {
-                    UserId = UserGuid,
+                    UserId = LogistGuid,
                     Name = "Sasha",
                     Surname = "Trikorochki",
                     Patronymic = "Vitaljevich",
@@ -42,8 +55,43 @@ namespace Entities.Configuration
             (
                 new
                 {
-                    UserId = UserGuid,
+                    UserId = LogistGuid,
                     Login = "login1",
+                    Password = "password1",
+                    PasswordHashString = AuthenticationUtility.CalculateStringHash("password1")
+                }
+            );
+        }
+
+        private static void BuildAdmin(EntityTypeBuilder<User> builder)
+        {
+            builder.HasData
+            (
+                new User
+                {
+                    Id = AdminGuid,
+                    Role = Enums.UserRole.Admin
+                }
+            );
+
+            builder.OwnsOne(user => user.ContactPerson).HasData
+            (
+                new
+                {
+                    UserId = AdminGuid,
+                    Name = "Pasha",
+                    Surname = "Trichetire",
+                    Patronymic = "Olegovich",
+                    PhoneNumber = "19(4235)386-99-39"
+                }
+            );
+
+            builder.OwnsOne(user => user.AccountInfo).HasData
+            (
+                new
+                {
+                    UserId = AdminGuid,
+                    Login = "login2",
                     Password = "password1",
                     PasswordHashString = AuthenticationUtility.CalculateStringHash("password1")
                 }

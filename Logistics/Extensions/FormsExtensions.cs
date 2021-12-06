@@ -8,7 +8,7 @@ namespace Logistics.Extensions
 {
     public static class FormsExtensions
     {
-        public static void SetupWindowsStyle(this ExtendedWindow window)
+        public static void SetupWindowStyle(this ExtendedWindow window)
         {
             window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             window.WindowStyle = WindowStyle.None;

@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Logistics" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                      mc:Ignorable="d"
+        mc:Ignorable="d"
         Title="AdminMainForm" Height="450" Width="600" StateChanged="WindowStateChanged"  Loaded="WindowLoaded">
     <Border BorderBrush="{StaticResource PrimaryHueLightBrush}" BorderThickness="1" >
         <Grid>
@@ -50,13 +50,13 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
                     <RadioButton TabIndex="0" Style="{StaticResource MaterialDesignTabRadioButtonBottom}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Name="firstTab" Checked="TabChecked" Width="150" Content="Пользователи"/>
                     <RadioButton TabIndex="1" Style="{StaticResource MaterialDesignTabRadioButtonBottom}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Checked="TabChecked" Width="150" Content="Транспорт"/>
-                    <RadioButton TabIndex="1" Style="{StaticResource MaterialDesignTabRadioButtonBottom}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Checked="TabChecked" Width="150" Content="Прицепы"/>
-                    <RadioButton TabIndex="2" Style="{StaticResource MaterialDesignTabRadioButtonBottom}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Checked="TabChecked" Width="150" Content="Типы грузов"/>
+                    <RadioButton TabIndex="2" Style="{StaticResource MaterialDesignTabRadioButtonBottom}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Checked="TabChecked" Width="150" Content="Прицепы"/>
+                    <RadioButton TabIndex="3" Style="{StaticResource MaterialDesignTabRadioButtonBottom}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" Checked="TabChecked" Width="150" Content="Типы грузов"/>
                 </StackPanel>
-                <TabControl Grid.Row="1" x:Name="adminTab">
+                <TabControl Grid.Row="1" x:Name="adminTab" Background="{StaticResource SecondaryHueMidBrush}">
                     <TabControl.ItemContainerStyle>
                         <Style TargetType="{x:Type TabItem}">
                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -68,11 +68,11 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}"  Height="25" Width="25">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,7">
+                                <Button Click="AddUserClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}"  Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                <Button Click="EditUserClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
                                 <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
@@ -81,10 +81,10 @@
                             </StackPanel>
                             <DataGrid Grid.Row="1" Name="userDt" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Логин" Binding="{Binding Id}"/>
-                                    <DataGridTextColumn Header="Тип аккаунта" Binding="{Binding Address}"/>
-                                    <DataGridTextColumn Header="Фамилия" Binding="{Binding Address}"/>
-                                    <DataGridTextColumn Header="Номер телефона" Binding="{Binding Address}"/>
+                                    <DataGridTextColumn Header="Логин" Binding="{Binding Login}"/>
+                                    <DataGridTextColumn Header="Тип аккаунта" Binding="{Binding Role}"/>
+                                    <DataGridTextColumn Header="Фамилия" Binding="{Binding ContactPerson.Surname}"/>
+                                    <DataGridTextColumn Header="Номер телефона" Binding="{Binding ContactPerson.PhoneNumber}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -95,11 +95,11 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,7">
+                                <Button Click="AddTruckClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                <Button Click="EditTruckClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
                                 <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
@@ -108,18 +108,18 @@
                             </StackPanel>
                             <DataGrid Grid.Row="1" Name="truckDt" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding Id}" Width="150" MinWidth="150">
+                                    <DataGridTextColumn Binding="{Binding RegistrationNumber}" Width="150" MinWidth="150">
                                         <DataGridTextColumn.Header>
                                             <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
                                         </DataGridTextColumn.Header>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Binding="{Binding Address}" Width="130" MinWidth="130">
+                                    <DataGridTextColumn Binding="{Binding TransportedCargoType}" Width="130" MinWidth="130">
                                         <DataGridTextColumn.Header>
                                             <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Тип перевозимого груза"/>
                                         </DataGridTextColumn.Header>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Перевозчик" Binding="{Binding Address}"/>
-                                    <DataGridTextColumn Header="Грузоподъемность" Binding="{Binding Address}"/>
+                                    <DataGridTextColumn Header="Перевозчик" Binding="{Binding Driver.Surname}"/>
+                                    <DataGridTextColumn Header="Грузоподъемность" Binding="{Binding LoadCapacity}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -130,11 +130,11 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,7">
+                                <Button Click="AddTrailerClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                <Button Click="EditTrailerClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
                                 <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
@@ -143,17 +143,17 @@
                             </StackPanel>
                             <DataGrid Grid.Row="1" Name="trailerDt" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Binding="{Binding Id}" Width="150" MinWidth="150">
+                                    <DataGridTextColumn Binding="{Binding RegistrationNumber}" Width="150" MinWidth="150">
                                         <DataGridTextColumn.Header>
                                             <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Регистрационный номер"/>
                                         </DataGridTextColumn.Header>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Binding="{Binding Address}" Width="130" MinWidth="130">
+                                    <DataGridTextColumn Binding="{Binding TransportedCargoType}" Width="130" MinWidth="130">
                                         <DataGridTextColumn.Header>
                                             <TextBlock TextWrapping="wrap"  TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Тип перевозимого груза"/>
                                         </DataGridTextColumn.Header>
                                     </DataGridTextColumn>
-                                    <DataGridTextColumn Header="Грузоподъемность" Binding="{Binding Address}"/>
+                                    <DataGridTextColumn Header="Грузоподъемность" Binding="{Binding LoadCapacity}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>
@@ -164,11 +164,11 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,7">
+                                <Button Click="AddTypeClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Add" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
-                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                <Button Click="EditTypeClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                     <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                 </Button>
                                 <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
@@ -177,7 +177,7 @@
                             </StackPanel>
                             <DataGrid Grid.Row="1" Name="cargoTypeDt" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="Наименование" Binding="{Binding Address}"/>
+                                    <DataGridTextColumn Header="Наименование" Binding="{Binding Title}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

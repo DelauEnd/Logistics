@@ -2,7 +2,6 @@
 using Contracts;
 using Entities;
 using Entities.DataTransferObjects;
-using Entities.DataTransferObjects.ObjectsForUpdate;
 using Entities.Enums;
 using Entities.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,18 +24,28 @@ namespace Logistics
             CreateRouteMaps();
             CreateOrderMaps();
             CreateCustomerMaps();
+            CreateCargoTypeMaps();
             CreateUserMaps();
+        }
+
+        private void CreateCargoTypeMaps()
+        {
+            CreateMap<CargoType, CargoTypeDto>().ReverseMap();
         }
 
         private void CreateUserMaps()
         {
             CreateMap<User, UserDto>();
+            CreateMap<User, UserWithLoginDto>().ForMember(userDto => userDto.Login, option
+                  => option.MapFrom(user => user.AccountInfo.Login));
         }
 
         private void CreateTrailerMaps()
         {
             CreateMap<Trailer, TrailerDto>().ForMember(truck => truck.TransportedCargoType, option
                   => option.MapFrom(truckDto => truckDto.TransportedCargoType.Title));
+
+            CreateMap<TrailerForCreationDto, Trailer>();
         }
 
         private void CreateTruckMaps()
@@ -45,8 +54,6 @@ namespace Logistics
                 => option.MapFrom(truckDto => truckDto.TransportedCargoType.Title));
 
             CreateMap<TruckForCreationDto, Truck>();
-
-            CreateMap<TruckForUpdateDto, Truck>().ReverseMap();
         }
 
         private void CreateCargoMaps()
@@ -54,8 +61,6 @@ namespace Logistics
             CreateMap<Cargo, CargoDto>()
                 .ForMember(cargoDto => cargoDto.Type, option =>
                 option.MapFrom(cargo => cargo.Type.Title)).ReverseMap();
-
-            CreateMap<CargoForUpdateDto, Cargo>().ReverseMap();
 
             CreateMap<CargoForCreationDto, Cargo>().ReverseMap();
         }
@@ -81,17 +86,7 @@ namespace Logistics
 
             CreateMap<OrderForCreationDto, Order>()
                 .ForMember(order => order.Status, option =>
-                option.MapFrom(orderForCreation => Status.Processing));
-
-            CreateMap<OrderForUpdateDto, Order>()
-                .ForMember(order => order.Status, option =>
-                option.MapFrom(order => 
-                    Enum.IsDefined(typeof(Status), order.Status) ?
-                    Enum.Parse(typeof(Status), order.Status) :
-                    Status.Processing))
-                .ReverseMap()
-                .ForMember(updateOrder => updateOrder.Status, option  =>  
-                option.MapFrom(order => order.Status.ToString()));
+                option.MapFrom(orderForCreation => Status.Processing));          
         }
 
         private void CreateCustomerMaps()
@@ -99,8 +94,6 @@ namespace Logistics
             CreateMap<Customer, CustomerDto>();
 
             CreateMap<CustomerForCreationDto, Customer>();
-
-            CreateMap<CustomerForUpdateDto, Customer>().ReverseMap();
         }
     }
 }

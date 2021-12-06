@@ -23,15 +23,13 @@ namespace Logistics.LogistForms
     /// </summary>
     public partial class CreateCargoForm : ExtendedWindow
     {
-        private bool ForUpdate { get; set; }
         public bool Created { get; private set; } = false;
         public Guid? cargoId { get; set; }
 
-        public CreateCargoForm(bool forUpdate = false)
+        public CreateCargoForm()
         {
             InitializeComponent();
-            this.SetupWindowsStyle();
-            this.ForUpdate = forUpdate;
+            this.SetupWindowStyle();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -59,7 +57,7 @@ namespace Logistics.LogistForms
         {
             cargoId = cargo.Id;
             await SetupTypeSource();
-            var types = cargoType.ItemsSource as IEnumerable<CargoType>;
+            var types = cargoType.ItemsSource as IEnumerable<CargoTypeDto>;
 
             cargoHeight.Text = cargo.Dimensions.Height.ToString();
             cargoLength.Text = cargo.Dimensions.Length.ToString();
@@ -91,14 +89,14 @@ namespace Logistics.LogistForms
             {
                 Id = id,
                 Title = cargoTitle.Text,
-                Weight = int.Parse(cargoWeight.Text),
+                Weight = double.Parse(cargoWeight.Text),
                 OrderId = Guid.Empty,
-                TypeId = (cargoType.SelectedItem as CargoType).Id,
+                TypeId = (cargoType.SelectedItem as CargoTypeDto).Id,
                 Dimensions = new Dimensions
                 {
-                    Height = int.Parse(cargoHeight.Text),
-                    Length = int.Parse(cargoLength.Text),
-                    Width = int.Parse(cargoWidth.Text)
+                    Height = double.Parse(cargoHeight.Text),
+                    Length = double.Parse(cargoLength.Text),
+                    Width = double.Parse(cargoWidth.Text)
                 }
             };
             return cargo;
@@ -127,7 +125,8 @@ namespace Logistics.LogistForms
         private async Task SetupTypeSource()
         {
             var types = await repository.Types.GetAllTypes(false);
-            cargoType.ItemsSource = types;
-        }
+            var mappedTypes = mapper.Map <IEnumerable<CargoTypeDto>>(types);
+            cargoType.ItemsSource = mappedTypes;
+        } 
     }
 }

@@ -37,5 +37,8 @@ namespace Repository.Users
             => await FindByCondition(truck => truck.RegistrationNumber == number, trackChanges)
             .Include(truck => truck.TransportedCargoType)
             .SingleOrDefaultAsync();
+
+        public void UpdateTruck(Truck truck)
+            => Update(truck);
     }
 }

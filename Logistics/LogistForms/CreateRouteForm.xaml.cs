@@ -32,7 +32,7 @@ namespace Logistics.LogistForms
         public CreateRouteForm(AuthenticatedUserInfo userInfo, bool forUpdate = false)
         {
             InitializeComponent();
-            this.SetupWindowsStyle();
+            this.SetupWindowStyle();
             firstTab.IsChecked = true;
             this.forUpdate = forUpdate;
             this.UserInfo = userInfo;
