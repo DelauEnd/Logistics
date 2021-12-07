@@ -16,7 +16,7 @@ namespace Entities.Configuration
         {
             DapperExecutor.ExecuteQuery(Queries.OnCargoUpdate);
             DapperExecutor.ExecuteQuery(Queries.OnCargoCreate);
-            DapperExecutor.ExecuteQuery(Queries.SetCompletedOrderStatusIfAllCargoesAreCompleted);
+            //DapperExecutor.ExecuteQuery(Queries.SetCompletedOrderStatusIfAllCargoesAreCompleted);
         }
     }
 }

@@ -11,7 +11,8 @@ namespace Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<CargoType> builder)
         {
-            AddInitialData(builder);
+            if (Configuration.ShouldAddInitialData())
+                AddInitialData(builder);
         }
 
         private void AddInitialData(EntityTypeBuilder<CargoType> builder)

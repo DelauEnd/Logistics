@@ -30,7 +30,6 @@
                                 <StackPanel Orientation="Vertical" Margin="4">
                                     <RadioButton TabIndex="0" Checked="TabChange" Name="orderTabBtn" Style="{StaticResource MaterialDesignTabRadioButtonLeft}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" IsChecked="false" Height="15" FontSize="14" Content="Заказы" />
                                     <RadioButton TabIndex="1" Checked="TabChange" Style="{StaticResource MaterialDesignTabRadioButtonLeft}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" IsChecked="False" Height="15" FontSize="14" Content="Маршрутные листы"/>
-                                    <RadioButton TabIndex="2" Checked="TabChange" Style="{StaticResource MaterialDesignTabRadioButtonLeft}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" IsChecked="False" Height="15" FontSize="14" Content="Транспорт"/>
                                 </StackPanel>
                             </materialDesign:PopupBox.PopupContent>
                         </materialDesign:PopupBox>
@@ -91,7 +90,7 @@
                                             <Button Style="{StaticResource MaterialDesignIconButton}" Click="UpdateOrderClick" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                 <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
-                                            <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                            <Button Click="RemoveOrderClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                 <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
                                         </StackPanel>
@@ -324,14 +323,14 @@
                                                 <Button Style="{StaticResource MaterialDesignIconButton}" Click="EditRouteClick" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                     <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
-                                                <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                <Button Click="RemoveRouteClick"  Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                     <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
                                             </StackPanel>
                                         </Grid>
                                         <Grid Grid.Column="1" HorizontalAlignment="Right">
                                             <StackPanel Orientation="Horizontal" Margin="10,2">
-                                                <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                <Button Click="CreateRouteSheetClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                     <materialDesign:PackIcon Kind="MicrosoftExcel" ToolTip="Сформировать отчет" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
                                                 <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0" Width="160" Height="30" FontSize="12" Content="Отобразить маршрут"/>

@@ -11,7 +11,8 @@ namespace Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<Customer> builder)
         {
-            AddInitialData(builder);
+            if (Configuration.ShouldAddInitialData())
+                AddInitialData(builder);
         }
 
         private void AddInitialData(EntityTypeBuilder<Customer> builder)

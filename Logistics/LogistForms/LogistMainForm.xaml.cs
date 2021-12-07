@@ -19,6 +19,7 @@ using Entities.RequestFeautures;
 using Entities.Utility;
 using Logistics.Extensions;
 using Logistics.Utility;
+using Logistics.Utility.ExcelHandler;
 using MaterialDesignThemes.Wpf;
 
 namespace Logistics.LogistForms
@@ -117,8 +118,6 @@ namespace Logistics.LogistForms
                 await SetDefaultOrders();
             else if (tabIndex == 1 && !routesLoaded)
                 await SetDefaultRoutes();
-            else if (tabIndex == 2)
-                MessageBox.Show("Это вы зря сюда жмакнули, вкладка еще не готова", "жмак", MessageBoxButton.OK, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.ServiceNotification);
         }
 
         private async Task SetupUserInfo()
@@ -402,7 +401,6 @@ namespace Logistics.LogistForms
             await SetDefaultRoutes();
         }
 
-
         private async void EditRouteClick(object sender, RoutedEventArgs e)
         {
             var routeForm = new CreateRouteForm(UserInfo, true);
@@ -455,6 +453,39 @@ namespace Logistics.LogistForms
             await orderForm.BuildOrder();
             await orderForm.HandleCargoes();
             await SetDefaultOrders();
+        }
+
+        private async void RemoveOrderClick(object sender, RoutedEventArgs e)
+        {
+            var selectedOrder = GetSelectedOrder();
+            if (selectedOrder == null)
+                return;
+
+            var order = await repository.Orders.GetOrderByIdAsync(selectedOrder.Id, true);
+            repository.Orders.DeleteOrder(order);
+            await repository.SaveAsync();
+            await SetDefaultOrders();
+        }
+
+        private async void RemoveRouteClick(object sender, RoutedEventArgs e)
+        {
+            var selecterRoute = GetSelectedRoute();
+            if (selecterRoute == null)
+                return;
+
+            var route = await repository.Routes.GetRouteByIdAsync(selecterRoute.Id, true);
+            repository.Routes.DeleteRoute(route);
+            await repository.SaveAsync();
+            await SetDefaultRoutes();
+        }
+
+        private void CreateRouteSheetClick(object sender, RoutedEventArgs e)
+        {
+            var selecterRoute = GetSelectedRoute();
+            if (selecterRoute == null)
+                return;
+            var routeSheetHandler = new ExcelRouteSheet(selecterRoute.Id);
+            routeSheetHandler.BuildReport();
         }
     }
 }

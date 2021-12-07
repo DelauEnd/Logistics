@@ -10,7 +10,8 @@ namespace Entities.Configuration
         public void Configure(EntityTypeBuilder<Order> builder)
         {
             ConfigureModel(builder);
-            AddInitialData(builder);
+            if (Configuration.ShouldAddInitialData())
+                AddInitialData(builder);
         }
 
         private void ConfigureModel(EntityTypeBuilder<Order> builder)

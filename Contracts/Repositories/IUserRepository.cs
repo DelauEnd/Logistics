@@ -17,5 +17,6 @@ namespace Contracts.Repositories
         public Task<IEnumerable<User>> GetAllUsersAsync(bool trackChanges);
         void CreateUser(User user);
         void UpdateUser(User user);
+        void DeleteUser(User user);
     }
 }

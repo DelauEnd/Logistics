@@ -62,7 +62,7 @@
                                             <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Click="EditSenderClick" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                                 <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
-                                            <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                            <Button Click="RemoveSenderClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                                 <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
                                         </StackPanel>
@@ -134,7 +134,7 @@
                                             <Button Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Click="EditDestinationClick" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                                 <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
-                                            <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                            <Button Click="RemoveDestinationClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                                 <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                             </Button>
                                         </StackPanel>
@@ -201,7 +201,7 @@
                                         <Button Click="EditCargoClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                             <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                         </Button>
-                                        <Button Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
+                                        <Button Click="RemoveCargoClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="25" Width="25">
                                             <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                         </Button>
                                     </StackPanel>

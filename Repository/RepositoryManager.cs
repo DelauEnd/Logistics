@@ -108,7 +108,6 @@ namespace Repository
         public async Task SaveAsync()
         {
             await repositoryContext.SaveChangesAsync();
-            await RefreshAllAsync();
         }
 
         public async Task RefreshAllAsync()

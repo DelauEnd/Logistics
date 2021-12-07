@@ -342,5 +342,39 @@ namespace Logistics.LogistForms
             };
             return remappedCargo;
         }
+
+        private async void RemoveSenderClick(object sender, RoutedEventArgs e)
+        {
+            var selectedCustomer = GetSelectedSender();
+            if (selectedCustomer == null)
+                return;
+
+            var customer = await repository.Customers.GetCustomerByIdAsync(selectedCustomer.Id, true);
+            repository.Customers.DeleteCustomer(customer);
+            await repository.SaveAsync();
+            await SetAvailebleCustomers();
+        }
+
+        private async void RemoveDestinationClick(object sender, RoutedEventArgs e)
+        {
+            var selectedCustomer = GetSelectedDestination();
+            if (selectedCustomer == null)
+                return;
+
+            var customer = await repository.Customers.GetCustomerByIdAsync(selectedCustomer.Id, true);
+            repository.Customers.DeleteCustomer(customer);
+            await repository.SaveAsync();
+            await SetAvailebleCustomers();
+        }
+
+        private void RemoveCargoClick(object sender, RoutedEventArgs e)
+        {
+            var selectedCustomer = GetSelectedCargo();
+            if (selectedCustomer == null)
+                return;
+
+            cargoesDt.Items.Remove(selectedCustomer);
+            cargoesDt.Items.Refresh();
+        }
     }
 }

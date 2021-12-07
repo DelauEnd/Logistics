@@ -11,7 +11,8 @@ namespace Entities.Configuration
     {
         public void Configure(EntityTypeBuilder<Route> builder)
         {
-            AddInitialData(builder);
+            if (Configuration.ShouldAddInitialData())
+                AddInitialData(builder);
         }
 
         private void AddInitialData(EntityTypeBuilder<Route> builder)

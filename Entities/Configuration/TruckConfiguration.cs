@@ -12,7 +12,8 @@ namespace Entities.Configuration
         public void Configure(EntityTypeBuilder<Truck> builder)
         {
             ConfigureModel(builder);
-            AddInitialData(builder);
+            if (Configuration.ShouldAddInitialData())
+                AddInitialData(builder);
         }
 
         private void ConfigureModel(EntityTypeBuilder<Truck> builder)

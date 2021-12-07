@@ -273,7 +273,60 @@ namespace Logistics.AdminForms
 
             await typeForm.BuildCargoType();
             await SetDefaultTypes();
-        } 
+        }
         #endregion
+
+        private async void RemoveUserClick(object sender, RoutedEventArgs e)
+        {
+            var selectedUser = GetSelectedUser();
+            if (selectedUser == null)
+                return;
+            if (selectedUser.Id == UserInfo.userId)
+            {
+                MessageBox.Show("Вы не можете удалить свой аккаунт", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            var user = await repository.Users.GetUserByIdAsync(selectedUser.Id, true);
+            repository.Users.DeleteUser(user);
+            await repository.SaveAsync();
+            await SetDefaultUsers();
+        }
+
+        private async void RemoveTruckClick(object sender, RoutedEventArgs e)
+        {
+            var selectedTruck = GetSelectedTruck();
+            if (selectedTruck == null)
+                return;
+
+            var truck = await repository.Trucks.GetTruckByIdAsync(selectedTruck.Id, true);
+            repository.Trucks.DeleteTruck(truck);
+            await repository.SaveAsync();
+            await SetDefaultTrucks();
+        }
+
+        private async void RemoveDestinationClick(object sender, RoutedEventArgs e)
+        {
+            var selectedTailer = GetSelectedTrailer();
+            if (selectedTailer == null)
+                return;
+
+            var trailer = await repository.Trailers.GetTrailerByIdAsync(selectedTailer.Id, true);
+            repository.Trailers.DeleteTrailer(trailer);
+            await repository.SaveAsync();
+            await SetDefaultTrailers();
+        }
+
+        private async void RemoveTypeClick(object sender, RoutedEventArgs e)
+        {
+            var selectedType = GetSelectedType();
+            if (selectedType == null)
+                return;
+
+            var type = await repository.Types.GetTypeByIdAsync(selectedType.Id, true);
+            repository.Types.DeleteType(type);
+            await repository.SaveAsync();
+            await SetDefaultTypes();
+        }
     }
 }

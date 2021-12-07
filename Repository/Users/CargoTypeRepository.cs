@@ -21,6 +21,9 @@ namespace Repository.Users
         public void CreateType(CargoType cargoType)
             => Create(cargoType);
 
+        public void DeleteType(CargoType type)
+            => Delete(type);
+
         public async Task<IEnumerable<CargoType>> GetAllTypes(bool trackChanges)
             => await FindAll(trackChanges).ToListAsync();
 

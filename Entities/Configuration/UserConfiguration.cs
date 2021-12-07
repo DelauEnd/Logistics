@@ -23,7 +23,8 @@ namespace Entities.Configuration
 
         private void AddInitialData(EntityTypeBuilder<User> builder)
         {
-            BuildLogist(builder);
+            if (Configuration.ShouldAddInitialData())
+                BuildLogist(builder);
             BuildAdmin(builder);
         }
 

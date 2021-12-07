@@ -69,5 +69,8 @@ namespace Repository.Users
 
         public void UpdateUser(User user)
             => Update(user);
+
+        public void DeleteUser(User user)
+            => Delete(user);
     }
 }
