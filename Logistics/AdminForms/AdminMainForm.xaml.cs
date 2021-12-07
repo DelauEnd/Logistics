@@ -305,7 +305,7 @@ namespace Logistics.AdminForms
             await SetDefaultTrucks();
         }
 
-        private async void RemoveDestinationClick(object sender, RoutedEventArgs e)
+        private async void RemoveTrailerClick(object sender, RoutedEventArgs e)
         {
             var selectedTailer = GetSelectedTrailer();
             if (selectedTailer == null)

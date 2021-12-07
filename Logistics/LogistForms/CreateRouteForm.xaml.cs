@@ -237,10 +237,10 @@ namespace Logistics.LogistForms
         private void SetTruckInfo(TruckDto truck)
         {
             selectedTruck.Text = GetSelectedTruck().RegistrationNumber;
-            cargoHeightTruck.Text = truck.LimitLoad.Height.ToString() ?? "-";
-            cargoLengthTruck.Text = truck.LimitLoad.Length.ToString() ?? "-";
-            cargoWidthTruck.Text = truck.LimitLoad.Width.ToString() ?? "-";
-            cargoWeightTruck.Text = truck.LoadCapacity.ToString();
+            cargoHeightTruck.Text = truck.LimitLoad != null ? truck.LimitLoad.Height.ToString() : "-";
+            cargoLengthTruck.Text = truck.LimitLoad != null ? truck.LimitLoad.Length.ToString() : "-";
+            cargoWidthTruck.Text = truck.LimitLoad != null ? truck.LimitLoad.ToString() : "-";
+            cargoWeightTruck.Text = truck.LoadCapacity != null ? truck.LoadCapacity.ToString() : "-";
             carrierFIO.Text = truck.Driver.Name + " "
                 + truck.Driver.Surname + " "
                 + truck.Driver.Patronymic;
