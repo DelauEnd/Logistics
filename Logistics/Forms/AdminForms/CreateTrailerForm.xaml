@@ -1,0 +1,67 @@
+﻿<local:ExtendedWindow x:Class="Logistics.AdminForms.CreateTrailerForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Logistics" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="CreateTrailerForm" Height="300" Width="300" Loaded="WindowLoaded">
+    <Border BorderBrush="{StaticResource PrimaryHueLightBrush}" BorderThickness="1" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Height="20" Background="{StaticResource PrimaryHueLightBrush}" MouseDown="Grid_MouseDown" >
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <Button Click="btnResizeWindowsClick" x:Name="btnResizeWindows" Height="19" Width="18" Margin="1" Style="{StaticResource   MaterialDesignIconButton}">
+                        <materialDesign:PackIcon Kind="WindowMinimize" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="18" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                    </Button>
+                    <Button Click="BtnCloseClick" Height="19" Width="18" Margin="1" Style="{StaticResource   MaterialDesignIconButton}">
+                        <materialDesign:PackIcon Kind="Close" HorizontalAlignment="Center" VerticalAlignment="Center" Height="18" Width="18" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="10">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Регистрационный номер:" FontSize="14" VerticalAlignment="Center" Width="170" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <TextBox x:Name="regNumber" Width="100" Margin="10,0" FontSize="14"/>
+                </StackPanel>
+                <StackPanel Name="truckInfo">
+                    <TextBlock Text="Характеристика" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Тип:" VerticalAlignment="Center" FontSize="14" Width="80"  Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                        <ComboBox x:Name="cargoType" Width="185" Margin="10,0" FontSize="14" ItemsSource="{Binding }">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontSize="14" Text="{Binding Title}" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Вес:" FontSize="14" VerticalAlignment="Center" Width="80" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                        <TextBox x:Name="weight" Width="190" Margin="10,0" FontSize="14"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Длина:" FontSize="14" VerticalAlignment="Center" Width="80" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                        <TextBox x:Name="length" Width="190" Margin="10,0" FontSize="14"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Высота:" FontSize="14" VerticalAlignment="Center" Width="80" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                        <TextBox x:Name="height" Width="190" Margin="10,0" FontSize="14"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Ширина:" FontSize="14" VerticalAlignment="Center" Width="80" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                        <TextBox x:Name="width" Width="190" Margin="10,0" FontSize="14"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Margin="10" Style="{StaticResource MaterialDesignFlatButton}" Width="110" Content="Отмена"/>
+                <Button Margin="10" Click="SaveClick" Style="{StaticResource MaterialDesignFlatLightBgButton}" Width="110" Content="Сохранить"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</local:ExtendedWindow>

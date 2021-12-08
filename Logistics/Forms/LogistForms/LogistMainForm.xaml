@@ -1,0 +1,495 @@
+﻿<local:ExtendedWindow x:Class="Logistics.LogistForms.LogistMainForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Logistics" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="LogistMainForm" Height="700" Width="1400" StateChanged="WindowStateChanged"  Loaded="WindowLoaded">
+    <Border BorderBrush="{StaticResource PrimaryHueLightBrush}" BorderThickness="1" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Height="40" Background="{StaticResource PrimaryHueLightBrush}" MouseDown="Grid_MouseDown" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Truck" Width="30" Height="30" Margin="5" VerticalAlignment="Center" Foreground="{StaticResource SecondaryHueLightBrush}"/>
+                        <TextBlock Text="ГРУЗОПЕРЕВОЗКИ" Padding="0,0,0,3" VerticalAlignment="Center" FontSize="20" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Foreground="{StaticResource SecondaryHueLightBrush}"/>
+                        <materialDesign:PopupBox Margin="5">
+                            <materialDesign:PopupBox.ToggleContent>
+                                <materialDesign:PackIcon Kind="Menu" Height="25" Width="25" Foreground="{StaticResource SecondaryHueLightBrush}"/>
+                            </materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PopupBox.PopupContent>
+                                <StackPanel Orientation="Vertical" Margin="4">
+                                    <RadioButton TabIndex="0" Checked="TabChange" Name="orderTabBtn" Style="{StaticResource MaterialDesignTabRadioButtonLeft}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" IsChecked="false" Height="15" FontSize="14" Content="Заказы" />
+                                    <RadioButton TabIndex="1" Checked="TabChange" Style="{StaticResource MaterialDesignTabRadioButtonLeft}" BorderBrush="{DynamicResource PrimaryHueMidBrush}" IsChecked="False" Height="15" FontSize="14" Content="Маршрутные листы"/>
+                                </StackPanel>
+                            </materialDesign:PopupBox.PopupContent>
+                        </materialDesign:PopupBox>
+                        <Grid Margin="10,0" Width="3" Background="{StaticResource SecondaryHueLightBrush}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="UserCircle" Width="35" Height="35" Margin="5,0" VerticalAlignment="Center" Foreground="{StaticResource SecondaryHueLightBrush}"/>
+                        <TextBlock Text="UserFIO" Name="UserFIO" Padding="0,0,0,3" VerticalAlignment="Center" FontSize="20" Style="{StaticResource MaterialDesignSubtitle1TextBlock}" Foreground="{StaticResource SecondaryHueLightBrush}"/>
+                    </StackPanel>
+                </Grid>
+                <Grid Grid.Column="2">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                        <Button Click="BtnMinimizeWindowsClick" Style="{StaticResource MaterialDesignIconForegroundButton}" Height="30" Width="30" >
+                            <materialDesign:PackIcon Kind="WindowMinimize" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                        </Button>
+                        <Button Click="BtnResizeWindowsClick" Name="resizeBtn" Style="{StaticResource MaterialDesignIconForegroundButton}" Height="30" Width="30" >
+                            <materialDesign:PackIcon Kind="WindowMaximize" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                        </Button>
+                        <Button Click="BtnCloseClick" Style="{StaticResource MaterialDesignIconForegroundButton}" Height="30" Width="30" >
+                            <materialDesign:PackIcon Kind="Close" HorizontalAlignment="Center" VerticalAlignment="Center" Height="25" Width="25" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Grid.Row="1">
+                <TabControl Name="tabMenu"  Background="{StaticResource SecondaryHueMidBrush}">
+                    <TabControl.ItemContainerStyle>
+                        <Style TargetType="{x:Type TabItem}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </Style>
+                    </TabControl.ItemContainerStyle>
+                    <TabItem>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <TextBlock Text="ЗАКАЗЫ" Margin="10,20,0,0" FontSize="30" Foreground="{StaticResource MaterialDesignTextAreaBorder}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <StackPanel Orientation="Horizontal" Margin="10,2">
+                                            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="CreateOrderClick" Width="190" Height="30" FontSize="12" Padding="0,-3,0,0" Content="Сформировать заказ"/>
+                                            <Button Style="{StaticResource MaterialDesignIconButton}" Click="UpdateOrderClick" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                                            </Button>
+                                            <Button Click="RemoveOrderClick" Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="10,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon VerticalAlignment="Center"
+                                            Kind="Search"
+                                            Height="20"
+                                            Width="20"
+                                            Foreground="{Binding BorderBrush, ElementName=searchTb}"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <TextBox Height="30" VerticalContentAlignment="Center" TextChanged="SearchOrderTextChanged" x:Name="searchOrderTb" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignTextBox}" materialDesign:TextFieldAssist.HasClearButton="True"/>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0"  Click="SearchOrderBtnClick" Margin="5,0,0,0" Width="120" Height="30" FontSize="12" Content="Найти"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DataGrid x:Name="orderDt" SelectionChanged="OrderDtSelectionChanged" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ColumnWidth="170" Margin="10" CanUserDeleteRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Номер" Binding="{Binding Id}"/>
+                                            <DataGridTextColumn Header="Отправитель" Binding="{Binding Sender}"/>
+                                            <DataGridTextColumn Header="Получатель" Binding="{Binding Destination}"/>
+                                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="10,10,0,10">
+                                            <StackPanel>
+                                                <TextBlock Text="Отправитель" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Адрес:" FontSize="14" Height="45" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Контактное лицо" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="ФИО:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Номер телефона:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Margin="0,10,10,10">
+                                            <StackPanel>
+                                                <TextBlock FontSize="18"/>
+                                                <TextBox
+                                    Text="pHolder"
+                                    ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                    x:Name="addressSenderTb"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Stretch"
+                                    VerticalScrollBarVisibility="Auto"
+                                    SpellCheck.IsEnabled="True"
+                                    IsReadOnly="True"
+                                    Height="40"/>
+                                                <TextBlock FontSize="18"/>
+                                                <TextBlock x:Name="fioSenderTb"  Text="pHolder" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"  FontSize="14"/>
+                                                <TextBlock x:Name="numberSenderTb"  Text="pHolder" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" FontSize="14"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="0,10,0,10">
+                                            <StackPanel>
+                                                <TextBlock Text="Получатель" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Адрес:" FontSize="14" Height="45" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Контактное лицо" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="ФИО:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Номер телефона:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Margin="0,10,10,10">
+                                            <StackPanel>
+                                                <TextBlock FontSize="18"/>
+                                                <TextBox                                      
+                                                Text="pHolder"
+                                                ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"
+                                                x:Name="addressDestinationTb"
+                                                TextWrapping="Wrap"
+                                                VerticalAlignment="Stretch"
+                                                VerticalScrollBarVisibility="Auto"
+                                                SpellCheck.IsEnabled="True"
+                                                IsReadOnly="True"
+                                                Height="40"/>       
+                                                <TextBlock FontSize="18"/>
+                                                <TextBlock x:Name="fioDestinationTb" Text="pHolder" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" FontSize="14"/>
+                                                <TextBlock x:Name="numberDestinationTb" Text="pHolder" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" FontSize="14"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                            <Grid Grid.Column="1" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <TextBlock Text="ГРУЗЫ" Margin="10,20,0,0" FontSize="30" Foreground="{StaticResource MaterialDesignTextAreaBorder}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="10,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon VerticalAlignment="Center"
+                                            Kind="Search"
+                                            Height="20"
+                                            Width="20"
+                                            Foreground="{Binding BorderBrush, ElementName=searchTb}"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <TextBox Height="30" VerticalContentAlignment="Center" x:Name="searchCargoTb" TextChanged="SearchCargoTbTextChanged" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignTextBox}" materialDesign:TextFieldAssist.HasClearButton="True"/>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="SearchCargoClick"  Padding="0,-3,0,0" Margin="5,0,0,0" Width="120" Height="30" FontSize="12" Content="Найти"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DataGrid x:Name="cargoDt" SelectionChanged="CargoDtSelectionChanged" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ColumnWidth="130" Margin="10" CanUserDeleteRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Номер" Binding="{Binding Id}"/>
+                                            <DataGridTextColumn Header="Наименование" Binding="{Binding Title}"/>
+                                            <DataGridTextColumn Header="Тип" Binding="{Binding Type}"/>
+                                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="0" Margin="10">
+                                        <StackPanel>
+                                            <TextBlock Text="Габариты груза" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            <TextBlock Text="Вес:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            <TextBlock Text="Длина:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            <TextBlock Text="Ширина:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            <TextBlock Text="Высота:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="1" Margin="0,10,10,10">
+                                        <StackPanel>
+                                            <TextBlock FontSize="16"/>
+                                            <TextBlock x:Name="cargoWeight" FontSize="14"/>
+                                            <TextBlock x:Name="cargoLength" FontSize="14"/>
+                                            <TextBlock x:Name="cargoWidth" FontSize="14"/>
+                                            <TextBlock x:Name="cargoHeight" FontSize="14"/>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Column="2" Margin="0,10,10,10">
+                                        <StackPanel>
+                                            <TextBlock FontSize="16"/>
+                                            <TextBlock Text="Кг." FontSize="14"/>
+                                            <TextBlock Text="М." FontSize="14"/>
+                                            <TextBlock Text="М." FontSize="14"/>
+                                            <TextBlock Text="М." FontSize="14"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <TextBlock Text="МАРШРУТНЫЕ ЛИСТЫ" Margin="10,20,0,0" FontSize="30" Foreground="{StaticResource MaterialDesignTextAreaBorder}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <StackPanel Orientation="Horizontal" Margin="10,2">
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0" Width="190" Height="30" FontSize="12" Click="CreateRouteClick" Content="Сформировать маршрут"/>
+                                                <Button Style="{StaticResource MaterialDesignIconButton}" Click="EditRouteClick" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                    <materialDesign:PackIcon Kind="Edit" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                                                </Button>
+                                                <Button Click="RemoveRouteClick"  Style="{StaticResource MaterialDesignIconButton}" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                    <materialDesign:PackIcon Kind="Trash" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Column="1" HorizontalAlignment="Right">
+                                            <StackPanel Orientation="Horizontal" Margin="10,2">
+                                                <Button Click="CreateRouteSheetClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
+                                                    <materialDesign:PackIcon Kind="MicrosoftExcel" ToolTip="Сформировать отчет" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
+                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0" Width="160" Height="30" FontSize="12" Content="Отобразить маршрут"/>
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="10,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon VerticalAlignment="Center"
+                                            Kind="Search"
+                                            Height="20"
+                                            Width="20"
+                                            Foreground="{Binding BorderBrush, ElementName=searchTb}"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <TextBox Height="30" VerticalContentAlignment="Center" Name="routeDtSearch" TextChanged="RouteDtSearchTextChanged" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignTextBox}" materialDesign:TextFieldAssist.HasClearButton="True"/>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="SearchRouteClick" Padding="0,-3,0,0" Margin="5,0,0,0" Width="120" Height="30" FontSize="12" Content="Найти"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DataGrid Name="routeDt" SelectionChanged="RouteDtSelectionChanged" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ColumnWidth="170" Margin="10" CanUserDeleteRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Номер" Binding="{Binding Id}"/>
+                                            <DataGridTextColumn Header="Транспорт" Binding="{Binding TruckRegistrationNumber}"/>
+                                            <DataGridTextColumn Header="Прицеп" Binding="{Binding TrailerRegistrationNumber}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                                <Grid Grid.Row="2">
+                                    <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="10,10,0,10">
+                                            <StackPanel>
+                                                <TextBlock Text="Перевозчик" FontSize="16" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="ФИО:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                <TextBlock Text="Номер телефона:" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Margin="10">
+                                        <StackPanel>
+                                            <TextBlock FontSize="16"/>
+                                            <TextBlock Text="pHolder" Name="driverFIO" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}"  FontSize="14"/>
+                                            <TextBlock Text="pHolder" Name="driverNumber" ToolTip="{Binding Path=Text, RelativeSource={RelativeSource Self}}" FontSize="14"/>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+
+                            <Grid Grid.Column="1" >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid Grid.Row="0">
+                                        <TextBlock Text="ГРУЗЫ" Margin="10,20,0,0" FontSize="30" Foreground="{StaticResource MaterialDesignTextAreaBorder}" Style="{StaticResource MaterialDesignSubtitle1TextBlock}"/>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Margin="10,2,0,0" HorizontalAlignment="Left" Padding="0,-3,0,0" Width="200" Height="30" FontSize="12" Content="Установить дату доставки"/>
+                                        <materialDesign:PopupBox Margin="10,0" Width="200" materialDesign:RippleAssist.IsDisabled="True" Closed="PopupDateClosed" Opened="PopupDateOpened" StaysOpen="True">
+                                            <materialDesign:PopupBox.ToggleContent>
+                                                <materialDesign:PackIcon Kind="DateRange" Foreground="{StaticResource MaterialDesignBackground}"  Height="25" Width="25"/>
+                                            </materialDesign:PopupBox.ToggleContent>
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <Grid Margin="5">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="auto"/>
+                                                            <RowDefinition Height="auto"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid Grid.Row="0">
+                                                            <StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock VerticalAlignment="Center" Text="Дата отгрузки:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                                    <DatePicker Margin="5,0" Width="100" Name="departureDatePicker"/>
+                                                                </StackPanel>
+                                                                <StackPanel Orientation="Horizontal">
+                                                                    <TextBlock VerticalAlignment="Center" Text="Дата выгрузки:" Width="120" FontSize="14" Foreground="{StaticResource MaterialDesignTextAreaBorder}"/>
+                                                                    <DatePicker Margin="5,0" Width="100" Name="arrivalDatePicker"/>
+                                                                </StackPanel>
+                                                            </StackPanel>
+                                                        </Grid>
+                                                        <Grid Grid.Row="1">
+                                                            <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Height="25" Content="Применить" Click="ApplyDateClick" Margin="0,10,0,0" Padding="0,0,0,7"/>
+                                                        </Grid>
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </materialDesign:PopupBox>
+                                    </Grid>
+                                    <Grid Grid.Row="2" Margin="10,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0">
+                                            <materialDesign:PackIcon VerticalAlignment="Center"
+                                            Kind="Search"
+                                            Height="20"
+                                            Width="20"
+                                            Foreground="{Binding BorderBrush, ElementName=searchTb}"/>
+                                        </Grid>
+                                        <Grid Grid.Column="1" Margin="0,2,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid Grid.Column="0">
+                                                <TextBox Height="30" VerticalContentAlignment="Center" Name="routeCargoDtSearch" TextChanged="RouteCargoDtSearchTextChanged" materialDesign:HintAssist.Hint="Поиск" Style="{StaticResource MaterialDesignTextBox}" materialDesign:TextFieldAssist.HasClearButton="True"/>
+                                            </Grid>
+                                            <Grid Grid.Column="1">
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="RouteCargoSearchClick" Padding="0,-3,0,0" Margin="5,0,0,0" Width="120" Height="30" FontSize="12" Content="Найти"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <DataGrid Name="routeCargoDt" SelectionChanged="RouteCargoDtSelectionChanged" MinColumnWidth="50" MaxColumnWidth="300" CanUserAddRows="False" IsReadOnly="True" AutoGenerateColumns="False" ColumnWidth="170" Margin="10" CanUserDeleteRows="False">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Номер груза" Binding="{Binding Id}"/>
+                                            <DataGridTextColumn Header="Номер заказа" Binding="{Binding OrderId}"/>
+                                            <DataGridTextColumn Header="Наименование" Binding="{Binding Title}"/>
+                                            <DataGridTextColumn Header="Дата отбытия" Binding="{Binding DepartureDate}"/>
+                                            <DataGridTextColumn Header="Дата прибытия" Binding="{Binding ArrivalDate}"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </TabItem>
+                    <TabItem>
+                        <TextBlock Text="ВКЛАДКА2" FontSize="50" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </TabItem>
+                </TabControl>
+            </Grid>
+        </Grid>
+    </Border>
+</local:ExtendedWindow>

@@ -38,6 +38,11 @@ namespace Repository.Users
             .Include(truck => truck.TransportedCargoType)
             .SingleOrDefaultAsync();
 
+        public async Task<Truck> GetTruckByRouteIdAsync(Guid id, bool trackChanges)
+        => await FindByCondition(truck => truck.Routes.Any(route => route.Id == id), trackChanges)
+            .Include(truck => truck.TransportedCargoType)
+            .SingleOrDefaultAsync();
+
         public void UpdateTruck(Truck truck)
             => Update(truck);
     }

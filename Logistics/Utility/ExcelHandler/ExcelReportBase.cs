@@ -18,6 +18,20 @@ namespace Logistics.Utility
             Configure();
             EditTemplate();
             SaveReport();
+            ReportCreated();
+            Close();
+        }
+
+        protected virtual void ReportCreated() { }
+
+        protected virtual void Close()
+        {
+            Workbook.Close(false);
+            Excel.Quit();
+            Excel = null;
+            Workbook = null;
+            Worksheet = null;
+            GC.Collect();
         }
 
         protected virtual void Configure()
@@ -44,6 +58,6 @@ namespace Logistics.Utility
             => Directory.GetCurrentDirectory() + "\\Reports";
 
         private string GetDocName()
-            => $"Report_{DateTime.Now:dd-MM-yyyy_hh:mm:ss}.xlsx";
+            => $"Report_{DateTime.Now:dd-MM-yyyy_hh.mm.ss}.xlsx";
     }
 }
