@@ -15,13 +15,13 @@ namespace Logistics.Utility.ExcelHandler
     {
         protected override string TemplatePath { get; set; }
         private Guid RouteId { get; set; }
-        List<RouteSheetUnit> Units { get; set; }
+        List<RouteUnit> Units { get; set; }
 
         public ExcelRouteSheet(Guid routeId)
         {
             TemplatePath = GetTemplatePath();
             RouteId = routeId;
-            Units = new List<RouteSheetUnit>();      
+            Units = new List<RouteUnit>();      
             BuildRouteSheetUnits();
         }
 

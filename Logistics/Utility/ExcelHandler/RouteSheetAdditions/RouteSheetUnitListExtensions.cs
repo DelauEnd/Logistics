@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Contracts;
 using Entities.RequestFeautures;
 using Entities.Models;
+using GMap.NET;
 
 namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
 {
@@ -15,14 +16,14 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
         private static IRepositoryManager _repository;
         private static IRepositoryManager repository => _repository ?? (_repository = App.ServiceProvider.GetService<IRepositoryManager>());
 
-        static RouteSheetUnit DestinationBuffer { get; set; }
-        static RouteSheetUnit SenderBuffer { get; set; }
+        static RouteUnit DestinationBuffer { get; set; }
+        static RouteUnit SenderBuffer { get; set; }
 
 
-        public static List<RouteSheetUnit> SortByDate(this List<RouteSheetUnit> list)
+        public static List<RouteUnit> SortByDate(this List<RouteUnit> list)
             => list.OrderBy(unit => unit.Date).ToList();
 
-        public static async Task<List<RouteSheetUnit>> Init(this List<RouteSheetUnit> list, Guid RouteId)
+        public static async Task<List<RouteUnit>> Init(this List<RouteUnit> list, Guid RouteId)
         {
             var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(RouteId, new CargoParameters(), false);
 
@@ -32,10 +33,10 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
             return list;
         }
 
-        private static async Task TryToAddInfo(Cargo cargo, List<RouteSheetUnit> list, Guid routeId)
+        private static async Task TryToAddInfo(Cargo cargo, List<RouteUnit> list, Guid routeId)
         {
-            SenderBuffer = new RouteSheetUnit();
-            DestinationBuffer = new RouteSheetUnit();
+            SenderBuffer = new RouteUnit();
+            DestinationBuffer = new RouteUnit();
 
             await BuildSenderBuffer(cargo, routeId);
             await BuildDestinationBuffer(cargo, routeId);
@@ -46,7 +47,7 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
             SenderBuffer = null;
         }
 
-        private static void AddBuffersIfNotAdded(Cargo cargo, List<RouteSheetUnit> list)
+        private static void AddBuffersIfNotAdded(Cargo cargo, List<RouteUnit> list)
         {
             if (list.Where(x => x.Number == cargo.OrderId).Count() != 2)
             {
@@ -64,6 +65,7 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
                 + truck.Driver.Name + " "
                 + truck.Driver.Patronymic;
 
+            DestinationBuffer.LatLng = new PointLatLng(destination.Coordinates.Latitude, destination.Coordinates.Longitude);
             DestinationBuffer.Date = (DateTime)cargo.ArrivalDate;
             DestinationBuffer.Purpose = Purpose.Unloading;
             DestinationBuffer.Number = cargo.OrderId;
@@ -80,6 +82,7 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
                 + truck.Driver.Name + " "
                 + truck.Driver.Patronymic;
 
+            SenderBuffer.LatLng = new PointLatLng(sender.Coordinates.Latitude, sender.Coordinates.Longitude);
             SenderBuffer.Date = (DateTime)cargo.DepartureDate;
             SenderBuffer.Purpose = Purpose.Loading;
             SenderBuffer.Number = cargo.OrderId;

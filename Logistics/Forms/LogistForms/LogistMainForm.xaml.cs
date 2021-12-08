@@ -495,5 +495,23 @@ namespace Logistics.LogistForms
             var routeSheetHandler = new ExcelRouteSheet(selecterRoute.Id);
             await Task.Run(() => routeSheetHandler.BuildReport());
         }
+
+        private async void ShowRouteClick(object sender, RoutedEventArgs e)
+        {
+            var selecterRoute = GetSelectedRoute();
+            if (selecterRoute == null)
+                return;
+
+            var cargoes = await repository.Cargoes.GetCargoesByRouteIdAsync(selecterRoute.Id, new CargoParameters(), false);
+            if (cargoes.Any(cargo => cargo.DepartureDate == null || cargo.ArrivalDate == null))
+            {
+                MessageBox.Show("Невозможно выполнить для маршрута с недоставленными грузами");
+                return;
+            }
+
+            var routeSheetHandler = new RouteForm(selecterRoute.Id);
+            routeSheetHandler.Show();
+            await routeSheetHandler.BuildRoute();
+        }
     }
 }

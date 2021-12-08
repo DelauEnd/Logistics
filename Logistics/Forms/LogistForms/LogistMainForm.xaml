@@ -333,7 +333,7 @@
                                                 <Button Click="CreateRouteSheetClick" Style="{StaticResource MaterialDesignIconButton}" Margin="10,0" Background="{StaticResource PrimaryHueLightBrush}" Height="30" Width="30">
                                                     <materialDesign:PackIcon Kind="MicrosoftExcel" ToolTip="Сформировать отчет" HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" Width="20" Foreground="{StaticResource  MaterialDesignBackground}"/>
                                                 </Button>
-                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Padding="0,-3,0,0" Width="160" Height="30" FontSize="12" Content="Отобразить маршрут"/>
+                                                <Button Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="ShowRouteClick" Padding="0,-3,0,0" Width="160" Height="30" FontSize="12" Content="Отобразить маршрут"/>
                                             </StackPanel>
                                         </Grid>
                                     </Grid>
