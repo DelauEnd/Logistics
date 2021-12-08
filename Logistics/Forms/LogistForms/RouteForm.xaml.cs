@@ -1,9 +1,11 @@
 ﻿using GMap.NET;
 using GMap.NET.MapProviders;
 using Logistics.Extensions;
+using Logistics.Utility.ExcelHandler.RouteSheetAdditions;
 using Logistics.Utility.MapHandler;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +25,7 @@ namespace Logistics.LogistForms
     public partial class RouteForm : ExtendedWindow
     {
         private Guid RouteId { get; set; }
+        private List<RouteUnit> Units{ get; set; }
 
         public RouteForm(Guid routeId)
         {
@@ -83,12 +86,27 @@ namespace Logistics.LogistForms
         private async Task TryToBuildRoute()
         {
             var router = new RouteHandler(RouteId);
-            var requestStr = await router.BuildRequestString();
+            await router.Init();
+            Units = router.Units;
+
+            var requestStr = router.BuildRequestString();
 
             var web = new RequestHandler();
             var route = web.GetRouteByHttp(requestStr);
             var gmapRoute = await router.BuildRoute(route);
             map.Markers.Add(gmapRoute);
+
+            var markers = router.BuildMarkers();
+            foreach (var marker in markers)
+            {
+                (marker.Shape as Grid).MouseDown += MarkerClick;
+                map.Markers.Add(marker);
+            }
+        }
+
+        private void MarkerClick(object sender, MouseButtonEventArgs e)
+        {
+            
         }
 
         private void OnMapDrag()

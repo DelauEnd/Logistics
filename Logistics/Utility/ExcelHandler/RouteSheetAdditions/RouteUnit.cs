@@ -7,6 +7,7 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
 {
     public class RouteUnit
     {
+        public int Id { get; set; }
         public DateTime Date { get; set; }
         public string Address { get; set; }
         public Purpose Purpose { get; set; }

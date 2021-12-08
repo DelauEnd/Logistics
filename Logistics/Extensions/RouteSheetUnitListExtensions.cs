@@ -51,7 +51,10 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
         {
             if (list.Where(x => x.Number == cargo.OrderId).Count() != 2)
             {
+                DestinationBuffer.Id = list.Count() + 1;
                 list.Add(DestinationBuffer);
+
+                SenderBuffer.Id = list.Count() + 1;
                 list.Add(SenderBuffer);
             }
         }
@@ -65,6 +68,7 @@ namespace Logistics.Utility.ExcelHandler.RouteSheetAdditions
                 + truck.Driver.Name + " "
                 + truck.Driver.Patronymic;
 
+            
             DestinationBuffer.LatLng = new PointLatLng(destination.Coordinates.Latitude, destination.Coordinates.Longitude);
             DestinationBuffer.Date = (DateTime)cargo.ArrivalDate;
             DestinationBuffer.Purpose = Purpose.Unloading;

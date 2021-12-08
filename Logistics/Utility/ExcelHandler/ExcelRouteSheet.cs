@@ -41,17 +41,15 @@ namespace Logistics.Utility.ExcelHandler
 
         private void SetUnitsInfo()
         {
-            var ind = 1;
             foreach(var unit in Units)
             {
-                Worksheet.Range["A" + (11 + ind)].Value = ind;
-                Worksheet.Range["C" + (11 + ind)].Value = unit.Date;
-                Worksheet.Range["E" + (11 + ind)].Value = unit.Address;
-                Worksheet.Range["H" + (11 + ind)].Value = unit.Purpose == Purpose.Loading ? 
+                Worksheet.Range["A" + (11 + unit.Id)].Value = unit.Id;
+                Worksheet.Range["C" + (11 + unit.Id)].Value = unit.Date;
+                Worksheet.Range["E" + (11 + unit.Id)].Value = unit.Address;
+                Worksheet.Range["H" + (11 + unit.Id)].Value = unit.Purpose == Purpose.Loading ? 
                     "Загрузка" : 
                     "Выгрузка";
-                Worksheet.Range["J" + (11 + ind)].Value = unit.Number.ToString();
-                ind++;
+                Worksheet.Range["J" + (11 + unit.Id)].Value = unit.Number.ToString();
             }
         }
 
